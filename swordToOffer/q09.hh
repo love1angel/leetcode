@@ -2,6 +2,9 @@
 // Created by Helianthus Xie on 2022/5/8.
 //
 
+#ifndef LEETCODE_Q09_HH
+#define LEETCODE_Q09_HH
+
 class CQueue {
 public:
     CQueue()
@@ -33,3 +36,5 @@ public:
 private:
     std::stack<int> m_add_stack, m_del_stack;
 };
+
+#endif // LEETCODE_Q09_HH

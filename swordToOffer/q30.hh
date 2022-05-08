@@ -2,6 +2,9 @@
 // Created by Helianthus Xie on 2022/5/8.
 //
 
+#ifndef LEETCODE_Q30_HH
+#define LEETCODE_Q30_HH
+
 class MinStack {
 public:
     MinStack()
@@ -36,3 +39,5 @@ public:
 private:
     std::stack<int> m_stack, m_min_stack;
 };
+
+#endif // LEETCODE_Q30_HH
