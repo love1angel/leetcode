@@ -25,18 +25,15 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode *reverseList(ListNode *head)
+    vector<int> diStringMatch(string s)
     {
-        return recurse(head, nullptr);
-    }
-
-private:
-    ListNode *recurse(ListNode *cur, ListNode *pre)
-    {
-        if (!cur) return pre;
-        auto temp = recurse(cur->next, cur);
-        cur->next = pre;
-        return temp;
+        int n = s.length(), low = 0, high = n;
+        std::vector<int> ret(n + 1);
+        for (int i = 0; i < n; ++i) {
+            ret[i] = s[i] == 'I' ? low++ : high--;
+        }
+        ret[n] = high;
+        return ret;
     }
 };
 
@@ -85,7 +82,9 @@ int main()
     l3.next = &l4;
     l4.next = &l5;
     l5.next = nullptr;
-    auto x = solution.reverseList(&l1);
-    std::cout << (~true) << std::endl;
+    auto x = solution.diStringMatch("IDID");
+    for (const auto item: x) {
+        std::cout << item << std::endl;
+    }
     return 0;
 }
