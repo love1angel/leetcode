@@ -25,15 +25,19 @@ struct ListNode {
 
 class Solution {
 public:
-    vector<int> diStringMatch(string s)
+    int findRepeatNumber(vector<int> &nums)
     {
-        int n = s.length(), low = 0, high = n;
-        std::vector<int> ret(n + 1);
-        for (int i = 0; i < n; ++i) {
-            ret[i] = s[i] == 'I' ? low++ : high--;
+        for (int i = 0; i < nums.size();) {
+            if (nums[i] == i) {
+                ++i;
+                continue;
+            }
+            if (nums[nums[i]] == nums[i])
+                return nums[i];
+
+            std::swap(nums[i], nums[nums[i]]);
         }
-        ret[n] = high;
-        return ret;
+        return 0;
     }
 };
 
@@ -82,9 +86,8 @@ int main()
     l3.next = &l4;
     l4.next = &l5;
     l5.next = nullptr;
-    auto x = solution.diStringMatch("IDID");
-    for (const auto item: x) {
-        std::cout << item << std::endl;
-    }
+    std::vector<int> vec = {2, 3, 1, 0, 2, 5, 3};
+    auto x = solution.findRepeatNumber(vec);
+    std::cout << x << std::endl;
     return 0;
 }
