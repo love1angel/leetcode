@@ -5,7 +5,9 @@
 #include <deque>
 #include <queue>
 #include <unordered_set>
+#include <unordered_map>
 #include <algorithm>
+#include <sys/socket.h>
 
 using std::vector;
 using std::string;
@@ -25,21 +27,25 @@ struct ListNode {
 
 class Solution {
 public:
-    int findRepeatNumber(vector<int> &nums)
+    ListNode *reverseList(ListNode *head)
     {
-        for (int i = 0; i < nums.size();) {
-            if (nums[i] == i) {
-                ++i;
-                continue;
-            }
-            if (nums[nums[i]] == nums[i])
-                return nums[i];
-
-            std::swap(nums[i], nums[nums[i]]);
+        ListNode *pre = nullptr;
+        while (head) {
+            auto temp = head->next;
+            head->next = pre;
+            pre = head->next;
+            head = temp;
         }
-        return 0;
+        return pre;
     }
 };
+
+int tet()
+{
+    constexpr int i = 10;
+    std::cout << i << std::endl;
+    return 0;
+}
 
 int main()
 {
@@ -86,8 +92,11 @@ int main()
     l3.next = &l4;
     l4.next = &l5;
     l5.next = nullptr;
-    std::vector<int> vec = {2, 3, 1, 0, 2, 5, 3};
-    auto x = solution.findRepeatNumber(vec);
-    std::cout << x << std::endl;
+    int i = 0;
+    if ('\0eeee') {
+        std::cout << "hello" << std::endl;
+    }
+    tet();
+//    std::cout << x << std::endl;
     return 0;
 }

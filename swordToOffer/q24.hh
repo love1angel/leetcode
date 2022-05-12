@@ -26,12 +26,12 @@ class Solution {
 public:
     ListNode *reverseList(ListNode *head)
     {
-        ListNode *pre = nullptr, *cur = head;
-        while (cur) {
-            auto temp = cur->next;
-            cur->next = pre;
-            pre = cur;
-            cur = temp;
+        ListNode *pre = nullptr;
+        while (head) {
+            auto temp = head->next;
+            head->next = pre;
+            pre = head;
+            head = temp;
         }
         return pre;
     }
