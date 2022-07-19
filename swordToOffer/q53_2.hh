@@ -1,10 +1,9 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <stack>
+//
+// Created by Helianthus Xie on 2022/7/19.
+//
 
-using namespace std;
+#ifndef LEETCODE_Q53_2_HH
+#define LEETCODE_Q53_2_HH
 
 class Solution {
 public:
@@ -23,10 +22,4 @@ public:
     }
 };
 
-int main(int argc, char *argv[])
-{
-    Solution solution;
-    std::vector<int> r = {1};
-    std::cout << solution.missingNumber(r) << std::endl;
-    return 0;
-}
+#endif //LEETCODE_Q53_2_HH

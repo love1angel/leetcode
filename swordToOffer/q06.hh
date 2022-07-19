@@ -11,7 +11,7 @@ public:
     {
         if (!head) return {};
         std::vector<int> temp;
-        auto ret = reversePrint(head->next);
+        auto ret = std::move(reversePrint(head->next));
         ret.push_back(head->val);
         return ret;
     }

@@ -4,10 +4,10 @@ project(swordToOfferUT)
 add_compile_options(-Werror)
 set(CMAKE_CXX_STANDARD 20)
 
-add
+add_subdirectory(tests)
 
 set(HEAD
-        *.hpp)
+        q03.hh)
 
 include(FetchContent)
 FetchContent_Declare(

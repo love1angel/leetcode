@@ -5,23 +5,24 @@
 #ifndef LEETCODE_Q03_HH
 #define LEETCODE_Q03_HH
 
-// similar question q442
-
 class Solution {
 public:
     int findRepeatNumber(vector<int> &nums)
     {
         for (int i = 0; i < nums.size();) {
-            if (nums[i] == i) {
+            if (nums[i] == i)
                 ++i;
-                continue;
+            else {
+                if (nums[nums[i]] == nums[i])
+                    return nums[i];
+                else {
+                    int temp = nums[nums[i]];
+                    nums[nums[i]] = nums[i];
+                    nums[i] = temp;
+                }
             }
-            if (nums[nums[i]] == nums[i])
-                return nums[i];
-
-            std::swap(nums[i], nums[nums[i]]);
         }
-        return 0;
+        return -1;
     }
 };
 

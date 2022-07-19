@@ -9,21 +9,22 @@ class Solution {
 public:
     string replaceSpace(string s)
     {
-        int cnt = 0, old = s.length();
-        for (const auto ch: s) {
-            if (ch == ' ')
+        int cnt = 0, b_size = s.size();
+        for (auto ch: s) {
+            if (' ' == ch)
                 ++cnt;
         }
-        int n = old + 2 * cnt;
-        s.resize(n);
-        for (int i = old - 1; cnt > 0; --i) {
-            if (s[i] == ' ') {
-                --cnt;
-                s[i + 2 * cnt] = '%';
-                s[i + 2 * cnt + 1] = '2';
-                s[i + 2 * cnt + 2] = '0';
+        int a_size = b_size + 2 * cnt;
+        s.resize(a_size);
+        --a_size;
+        --b_size;
+        for (; a_size != b_size; --b_size) {
+            if (s[b_size] != ' ') {
+                s[a_size--] = s[b_size];
             } else {
-                s[i + 2 * cnt] = s[i];
+                s[a_size--] = '0';
+                s[a_size--] = '2';
+                s[a_size--] = '%';
             }
         }
         return s;
