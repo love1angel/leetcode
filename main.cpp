@@ -17,49 +17,35 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode *root)
+    bool isSymmetric(TreeNode *root)
     {
-        if (!root) return {};
-        std::vector<std::vector<int>> ret;
-        m_deque.push_back(root);
-        bool flag = true;
-        while (!m_deque.empty()) {
-            std::vector<int> each;
-            int size = m_deque.size();
-            for (int i = 0; i < size; ++i) {
-                const auto &node = m_deque[0];
-                each.push_back(node->val);
-                if (node->left) m_deque.push_back(node->left);
-                if (node->right) m_deque.push_back(node->right);
-                m_deque.pop_front();
-            }
-            if (!flag) {
-                for (int i = 0; i < size / 2; ++i) {
-                    std::swap(each[i], each[size - 1 - i]);
-                }
-            }
-            ret.push_back(each);
-            flag = !flag;
-        }
-        return ret;
+        return recur(root, root);
     }
 
-private:
-    std::deque<TreeNode *> m_deque;
+    bool recur(TreeNode *left, TreeNode *right)
+    {
+        if (!left && !right) return true;
+        return (left && right) && left->val == right->val &&
+               recur(left->left, right->right) &&
+               recur(left->right, right->left);
+    }
 };
 
 
 int main(int argc, char *argv[])
 {
-    TreeNode n4(7, nullptr, nullptr);
-    TreeNode n3(15, nullptr, nullptr);
-    TreeNode n2(20, &n3, &n4);
-    TreeNode n1(9, nullptr, nullptr);
-    TreeNode n0(3, &n1, &n2);
+
+    TreeNode n6(9, nullptr, nullptr);
+    TreeNode n5(6, nullptr, nullptr);
+    TreeNode n4(3, nullptr, nullptr);
+    TreeNode n3(1, nullptr, nullptr);
+    TreeNode n2(7, &n5, &n6);
+    TreeNode n1(2, &n3, &n4);
+    TreeNode n0(4, &n1, &n2);
 
     Solution solution;
-//    auto ret = solution.levelOrder(&n0);
 
+    auto ret = solution.mirrorTree(&n0);
     std::vector<int> s{1, 2, 3};
     auto beg = --s.end();
     std::cout << *beg << std::endl;
