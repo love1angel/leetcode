@@ -17,17 +17,14 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool isSymmetric(TreeNode *root)
+    int maxProfit(vector<int> &prices)
     {
-        return recur(root, root);
-    }
-
-    bool recur(TreeNode *left, TreeNode *right)
-    {
-        if (!left && !right) return true;
-        return (left && right) && left->val == right->val &&
-               recur(left->left, right->right) &&
-               recur(left->right, right->left);
+        int cur_max = 0, min = INT_MAX;
+        for (const auto &price: prices) {
+            min = price > min ? min : price;
+            cur_max = price - min > cur_max ? price - min : cur_max;
+        }
+        return cur_max;
     }
 };
 
@@ -45,7 +42,7 @@ int main(int argc, char *argv[])
 
     Solution solution;
 
-    auto ret = solution.mirrorTree(&n0);
+    std::cout << 1e9 << std::endl;
     std::vector<int> s{1, 2, 3};
     auto beg = --s.end();
     std::cout << *beg << std::endl;
