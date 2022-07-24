@@ -17,17 +17,21 @@ struct TreeNode {
 
 class Solution {
 public:
-    int maxProfit(vector<int> &prices)
+    int maxValue(vector<vector<int>> &grid)
     {
-        int cur_max = 0, min = INT_MAX;
-        for (const auto &price: prices) {
-            min = price > min ? min : price;
-            cur_max = price - min > cur_max ? price - min : cur_max;
+        int m = grid.size(), n = grid[0].size();
+        vector<int> dp(n);
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (i == 0 && j == 0) dp[0] = grid[0][0];
+                else if (i == 0) dp[j] = dp[j - 1] + grid[0][j];
+                else if (j == 0) dp[0] += grid[i][0];
+                else dp[j] = max(dp[j - 1], dp[j]) + grid[i][j];
+            }
         }
-        return cur_max;
+        return dp[n - 1];
     }
 };
-
 
 int main(int argc, char *argv[])
 {
