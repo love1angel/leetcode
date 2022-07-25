@@ -1,19 +1,9 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <stack>
+//
+// Created by Helianthus Xie on 2022/7/25.
+//
 
-using namespace std;
-
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right)
-    {}
-};
+#ifndef LEETCODE_Q48_HH
+#define LEETCODE_Q48_HH
 
 class Solution {
 public:
@@ -45,21 +35,4 @@ private:
     std::unordered_map<char, int> m_map;
 };
 
-
-int main(int argc, char *argv[])
-{
-
-    TreeNode n6(9, nullptr, nullptr);
-    TreeNode n5(6, nullptr, nullptr);
-    TreeNode n4(3, nullptr, nullptr);
-    TreeNode n3(1, nullptr, nullptr);
-    TreeNode n2(7, &n5, &n6);
-    TreeNode n1(2, &n3, &n4);
-    TreeNode n0(4, &n1, &n2);
-
-    Solution solution;
-
-    std::cout << solution.lengthOfLongestSubstring("abba") << std::endl;
-
-    return 0;
-}
+#endif //LEETCODE_Q48_HH
