@@ -24,25 +24,40 @@ struct ListNode {
     {}
 };
 
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+// 1  2  3  4  5
+
+// F  F  F  T  T
+
+// l: 4, r: 5
+//  m 3
+
+//  F
+
+bool isBadVersion(int version)
+{
+    if (version < 4)
+        return false;
+    return true;
+}
+
 class Solution {
 public:
-    ListNode *getKthFromEnd(ListNode *head, int k)
+    int searchInsert(vector<int> &nums, int target)
     {
-        auto fast = head, slow = head;
-
-        int i = 0;
-        while (i < k && fast) {
-            fast = fast->next;
-            ++i;
+        int beg = 0, end = nums.size() - 1;
+        while (beg <= end) {
+            auto mid = beg + (end - beg) / 2;
+            if (nums[mid] == target)
+                return mid;
+            if (nums[mid] < target)
+                beg = mid + 1;
+            else
+                end = mid - 1;
         }
-        if (i != k)
-            return head;
-
-        while (fast) {
-            fast = fast->next;
-            slow = slow->next;
-        }
-        return slow;
+        return beg;
     }
 };
 
@@ -61,7 +76,8 @@ int main(int argc, char *argv[])
     Solution solution;
 
     std::string s;
-    std::cout << (s == "23") << std::endl;
+    std::vector<int> vec{1, 3, 5, 7};
+    std::cout << solution.searchInsert(vec, 8) << std::endl;
 
     return 0;
 }
