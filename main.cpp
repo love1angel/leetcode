@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <stack>
+#include <unordered_set>
 
 using namespace std;
 
@@ -45,22 +46,16 @@ bool isBadVersion(int version)
 
 class Solution {
 public:
-    int searchInsert(vector<int> &nums, int target)
+    int maxSubArray(vector<int> &nums)
     {
-        int beg = 0, end = nums.size() - 1;
-        while (beg <= end) {
-            auto mid = beg + (end - beg) / 2;
-            if (nums[mid] == target)
-                return mid;
-            if (nums[mid] < target)
-                beg = mid + 1;
-            else
-                end = mid - 1;
+        int pre = 0, max_sum = nums[0];
+        for (const auto &num: nums) {
+            pre = std::max(pre + num, num);
+            max_sum = std::max(max_sum, pre);
         }
-        return beg;
+        return max_sum;
     }
 };
-
 
 int main(int argc, char *argv[])
 {
@@ -76,8 +71,8 @@ int main(int argc, char *argv[])
     Solution solution;
 
     std::string s;
-    std::vector<int> vec{1, 3, 5, 7};
-    std::cout << solution.searchInsert(vec, 8) << std::endl;
+    std::vector<int> vec{1, 2, 3, 1};
+    std::cout << (solution.containsDuplicate(vec) == true) << std::endl;
 
     return 0;
 }

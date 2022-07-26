@@ -7,7 +7,6 @@
 
 class Solution {
 public:
-
     int firstBadVersion(int n)
     {
         int l = 1, r = n;
