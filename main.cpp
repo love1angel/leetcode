@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <stack>
 #include <unordered_set>
+#include <>
 
 using namespace std;
 
@@ -25,35 +26,11 @@ struct ListNode {
     {}
 };
 
-// The API isBadVersion is defined for you.
-// bool isBadVersion(int version);
-
-// 1  2  3  4  5
-
-// F  F  F  T  T
-
-// l: 4, r: 5
-//  m 3
-
-//  F
-
-bool isBadVersion(int version)
-{
-    if (version < 4)
-        return false;
-    return true;
-}
-
 class Solution {
 public:
-    int maxSubArray(vector<int> &nums)
+    void rotate(vector<int> &nums, int k)
     {
-        int pre = 0, max_sum = nums[0];
-        for (const auto &num: nums) {
-            pre = std::max(pre + num, num);
-            max_sum = std::max(max_sum, pre);
-        }
-        return max_sum;
+        std::gc
     }
 };
 
@@ -68,11 +45,24 @@ int main(int argc, char *argv[])
     TreeNode n1(2, &n3, &n4);
     TreeNode n0(4, &n1, &n2);
 
+    ListNode l0(1);
+    ListNode l1(2);
+    ListNode l2(4);
+    l0.next = &l1;
+    l1.next = &l2;
+
+
+    ListNode l3(1);
+    ListNode l4(3);
+    ListNode l5(4);
+    l3.next = &l4;
+    l4.next = &l5;
+
     Solution solution;
 
     std::string s;
     std::vector<int> vec{1, 2, 3, 1};
-    std::cout << (solution.containsDuplicate(vec) == true) << std::endl;
+    std::cout << solution.mergeTwoLists(&l0, &l3) << std::endl;
 
     return 0;
 }
