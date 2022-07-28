@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <stack>
 #include <unordered_set>
-#include <>
 
 using namespace std;
 
@@ -28,9 +27,20 @@ struct ListNode {
 
 class Solution {
 public:
-    void rotate(vector<int> &nums, int k)
+    string reverseWords(string s)
     {
-        std::gc
+        int n = s.size();
+        string ans = "";
+        for (int i = n - 1; i >= 0; i--) {
+            if (s[i] != ' ') {
+                int right = i;
+                while (i >= 0 && s[i] != ' ') {
+                    i--;
+                }
+                ans += s.substr(i + 1, right - i) + " ";
+            }
+        }
+        return ans.substr(0, ans.size() - 1);
     }
 };
 
