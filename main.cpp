@@ -3,7 +3,9 @@
 #include <vector>
 #include <unordered_map>
 #include <stack>
+#include <thread>
 #include <unordered_set>
+#include <random>
 
 using namespace std;
 
@@ -27,24 +29,25 @@ struct ListNode {
 
 class Solution {
 public:
-    string reverseWords(string s)
+    int sumNums(int n)
     {
-        int n = s.size();
-        string ans = "";
-        for (int i = n - 1; i >= 0; i--) {
-            if (s[i] != ' ') {
-                int right = i;
-                while (i >= 0 && s[i] != ' ') {
-                    i--;
-                }
-                ans += s.substr(i + 1, right - i) + " ";
-            }
-        }
-        return ans.substr(0, ans.size() - 1);
+        return 1 +
     }
 };
 
-int main(int argc, char *argv[])
+int test()
+{
+    for (int i = 0; i < 10; ++i) {
+        std::cout << i << std::endl;
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    return 0;
+}
+
+std::string s =
+        int
+
+main(int argc, char *argv[])
 {
 
     TreeNode n6(9, nullptr, nullptr);
@@ -69,10 +72,12 @@ int main(int argc, char *argv[])
     l4.next = &l5;
 
     Solution solution;
+    std::default_random_engine random(std::chrono::system_clock::now().time_since_epoch().count());
 
-    std::string s;
-    std::vector<int> vec{1, 2, 3, 1};
-    std::cout << solution.mergeTwoLists(&l0, &l3) << std::endl;
+    std::uniform_int_distribution<int> dist(0, 9);
 
+    for (int i = 0; i < 10; ++i) {
+        std::cout << dist(random) << std::endl;
+    }
     return 0;
 }
