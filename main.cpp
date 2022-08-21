@@ -6,6 +6,7 @@
 #include <thread>
 #include <unordered_set>
 #include <random>
+#include <set>
 
 using namespace std;
 
@@ -27,27 +28,51 @@ struct ListNode {
     {}
 };
 
-class Solution {
+class MinStack {
 public:
-    int sumNums(int n)
+    MinStack() = default;
+
+    void push(int x)
     {
-        return 1 +
+        if (m_stack.empty() || m_min_stack.top() >= x)
+            m_min_stack.push(x);
+        m_stack.push(x);
     }
+
+    void pop()
+    {
+        if (!m_stack.empty() && m_stack.top() == m_min_stack.top())
+            m_min_stack.pop();
+        m_stack.pop();
+    }
+
+    int top()
+    {
+        return m_stack.top();
+    }
+
+    int min()
+    {
+        return m_min_stack.top();
+    }
+
+private:
+    std::stack<int> m_stack, m_min_stack;
 };
 
-int test()
+
+constexpr int new_sz()
 {
-    for (int i = 0; i < 10; ++i) {
-        std::cout << i << std::endl;
-    }
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    return 0;
+    return 42;
 }
 
-std::string s =
-        int
+constexpr size_t scale(size_t cnt)
+{
+    return new_sz() * cnt;
+}
 
-main(int argc, char *argv[])
+
+int main(int argc, char *argv[])
 {
 
     TreeNode n6(9, nullptr, nullptr);
@@ -71,13 +96,28 @@ main(int argc, char *argv[])
     l3.next = &l4;
     l4.next = &l5;
 
-    Solution solution;
+//    Solution solution;
     std::default_random_engine random(std::chrono::system_clock::now().time_since_epoch().count());
 
     std::uniform_int_distribution<int> dist(0, 9);
 
     for (int i = 0; i < 10; ++i) {
-        std::cout << dist(random) << std::endl;
+//        std::cout << dist(random) << std::endl;
     }
+
+
+    int i = 10;
+
+    auto lam = [m_ref(i)]() {
+        std::cout << m_ref << std::endl;
+    };
+    lam();
+
+    int iii = 1;
+    auto f = [](const int i) {
+        std::cout << i << std::endl;
+    };
+
+
     return 0;
 }

@@ -7,11 +7,7 @@
 
 class MinStack {
 public:
-
-    MinStack()
-    {
-
-    }
+    MinStack() = default;
 
     void push(int x)
     {
@@ -22,7 +18,7 @@ public:
 
     void pop()
     {
-        if (!m_min_stack.empty() && m_min_stack.top() == m_stack.top())
+        if (!m_stack.empty() && m_stack.top() == m_min_stack.top())
             m_min_stack.pop();
         m_stack.pop();
     }

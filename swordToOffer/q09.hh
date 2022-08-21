@@ -5,12 +5,10 @@
 #ifndef LEETCODE_Q09_HH
 #define LEETCODE_Q09_HH
 
+
 class CQueue {
 public:
-    CQueue()
-    {
-
-    }
+    CQueue() = default;
 
     void appendTail(int value)
     {
@@ -19,13 +17,14 @@ public:
 
     int deleteHead()
     {
-        int ret = -1;
         if (m_del_stack.empty()) {
             while (!m_add_stack.empty()) {
                 m_del_stack.push(m_add_stack.top());
                 m_add_stack.pop();
             }
         }
+
+        int ret = -1;
         if (!m_del_stack.empty()) {
             ret = m_del_stack.top();
             m_del_stack.pop();
