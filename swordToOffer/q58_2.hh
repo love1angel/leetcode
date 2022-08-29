@@ -2,8 +2,8 @@
 // Created by Helianthus Xie on 2022/5/10.
 //
 
-#ifndef LEETCODE_Q58_HH
-#define LEETCODE_Q58_HH
+#ifndef LEETCODE_Q58_2_HH
+#define LEETCODE_Q58_2_HH
 
 class Solution {
 public:
@@ -26,4 +26,4 @@ private:
     }
 };
 
-#endif //LEETCODE_Q58_HH
+#endif //LEETCODE_Q58_2_HH

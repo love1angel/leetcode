@@ -28,36 +28,39 @@ struct ListNode {
     {}
 };
 
-class MinStack {
+class Node {
 public:
-    MinStack() = default;
+    int val;
+    Node *next;
+    Node *random;
 
-    void push(int x)
+    Node(int _val)
     {
-        if (m_stack.empty() || m_min_stack.top() >= x)
-            m_min_stack.push(x);
-        m_stack.push(x);
+        val = _val;
+        next = NULL;
+        random = NULL;
     }
+};
 
-    void pop()
+class Solution {
+public:
+    string reverseLeftWords(string s, int n)
     {
-        if (!m_stack.empty() && m_stack.top() == m_min_stack.top())
-            m_min_stack.pop();
-        m_stack.pop();
-    }
-
-    int top()
-    {
-        return m_stack.top();
-    }
-
-    int min()
-    {
-        return m_min_stack.top();
+        exchange(s, 0, n);
+        exchange(s, n, s.size());
+        exchange(s, 0, s.size());
+        return s;
     }
 
 private:
-    std::stack<int> m_stack, m_min_stack;
+    void exchange(std::string &s, int beg, size_t end)
+    {
+        for (int i = 0; i < (end - beg) / 2; ++i) {
+            char temp = s[beg + i];
+            s[beg + i] = s[end - 1 - i];
+            s[end - 1 - i] = temp;
+        }
+    }
 };
 
 
@@ -118,6 +121,9 @@ int main(int argc, char *argv[])
         std::cout << i << std::endl;
     };
 
+    Solution solution;
+
+    std::cout << solution.reverseLeftWords("lrloseumgh", 6) << std::endl;
 
     return 0;
 }
