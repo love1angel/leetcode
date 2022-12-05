@@ -5,30 +5,39 @@
 #ifndef LEETCODE_Q53_1_HH
 #define LEETCODE_Q53_1_HH
 
+#include <vector>
+
 class Solution {
 public:
-    int search(vector<int> &nums, int target)
+    int search(std::vector<int> &nums, int target)
     {
-        int beg = 0, end = nums.size();
-        int mid = beg + (end - beg) / 2;
-        while (mid != end && nums[mid] != target) {
-            if (nums[mid] < target)
+        auto beg = nums.cbegin(), end = nums.cend();
+        auto mid = beg + (end - beg) / 2;
+        while (mid != end && *mid != target) {
+            if (*mid < target) {
                 beg = mid + 1;
-            else
+            } else {
                 end = mid;
+            }
             mid = beg + (end - beg) / 2;
         }
-        int cnt = 0;
-        if (mid == end)
-            return cnt;
-        for (int i = mid; i < nums.size(); ++i) {
-            if (nums[i] == target)
-                ++cnt;
+
+        if (mid == end) {
+            return 0;
         }
-        for (int i = mid - 1; i >= 0; --i) {
-            if (nums[i] == target)
+
+        int cnt = 1;
+        for (auto i = mid + 1; i < nums.cend(); ++i) {
+            if (*i == target) {
                 ++cnt;
+            }
         }
+        for (auto i = mid - 1; i >= nums.cbegin(); --i) {
+            if (*i == target) {
+                ++cnt;
+            }
+        }
+
         return cnt;
     }
 };

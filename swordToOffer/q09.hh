@@ -5,6 +5,7 @@
 #ifndef LEETCODE_Q09_HH
 #define LEETCODE_Q09_HH
 
+#include <stack>
 
 class CQueue {
 public:

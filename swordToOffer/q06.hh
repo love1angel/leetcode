@@ -5,9 +5,19 @@
 #ifndef LEETCODE_Q06_HH
 #define LEETCODE_Q06_HH
 
+#include <vector>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+
+    ListNode(int x) : val(x), next(nullptr)
+    {}
+};
+
 class Solution {
 public:
-    vector<int> reversePrint(ListNode *head)
+    std::vector<int> reversePrint(ListNode *head)
     {
         std::vector<int> ret;
         while (head) {
@@ -15,11 +25,11 @@ public:
             head = head->next;
         }
 
-        auto size = ret.size();
-        for (int i = 0; i < size / 2; ++i) {
-            ret[i] ^= ret[size - 1 - i];
-            ret[size - 1 - i] ^= ret[i];
-            ret[i] ^= ret[size - 1 - i];
+        auto end = ret.size();
+        for (int i = 0; i < end / 2; ++i) {
+            ret[i] ^= ret[end - 1 - i];
+            ret[end - 1 - i] ^= ret[i];
+            ret[i] ^= ret[end - 1 - i];
         }
         return ret;
     }

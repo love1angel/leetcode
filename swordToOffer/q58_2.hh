@@ -5,9 +5,11 @@
 #ifndef LEETCODE_Q58_2_HH
 #define LEETCODE_Q58_2_HH
 
+#include <string>
+
 class Solution {
 public:
-    string reverseLeftWords(string s, int n)
+    std::string reverseLeftWords(std::string s, int n)
     {
         exchange(s, 0, n);
         exchange(s, n, s.size());
@@ -16,12 +18,10 @@ public:
     }
 
 private:
-    void exchange(std::string &s, int beg, size_t end)
+    void exchange(std::string &str, size_t beg, size_t end)
     {
-        for (int i = 0; i < (end - beg) / 2; ++i) {
-            char temp = s[beg + i];
-            s[beg + i] = s[end - 1 - i];
-            s[end - 1 - i] = temp;
+        for (size_t i = 0; i < (end - beg) / 2; ++i) {
+            std::swap(str[beg + i], str[end - 1 - i]);
         }
     }
 };

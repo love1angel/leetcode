@@ -5,17 +5,19 @@
 #ifndef LEETCODE_Q53_2_HH
 #define LEETCODE_Q53_2_HH
 
+#include <vector>
+
 class Solution {
 public:
-    int missingNumber(vector<int> &nums)
+    int missingNumber(std::vector<int> &nums)
     {
-        int beg = 0, end = nums.size() - 1;
-        int mid = beg + (end - beg) / 2;
-        while (beg <= end) {
-            if (nums[mid] == mid)
+        int beg = 0, end = nums.size(), mid = beg + (end - beg) / 2;
+        while (mid != end) {
+            if (nums[mid] == mid) {
                 beg = mid + 1;
-            else
-                end = end - 1;
+            } else {
+                end = mid;
+            }
             mid = beg + (end - beg) / 2;
         }
         return beg;

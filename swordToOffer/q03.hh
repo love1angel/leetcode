@@ -5,24 +5,23 @@
 #ifndef LEETCODE_Q03_HH
 #define LEETCODE_Q03_HH
 
+#include <vector>
+
 class Solution {
 public:
-    int findRepeatNumber(vector<int> &nums)
+    int findRepeatNumber(std::vector<int> &nums)
     {
         for (int i = 0; i < nums.size();) {
-            if (nums[i] == i)
+            if (nums[i] == i) {
                 ++i;
-            else {
-                if (nums[nums[i]] == nums[i])
+                continue;
+            } else {
+                if (nums[i] == nums[nums[i]])
                     return nums[i];
-                else {
-                    int temp = nums[nums[i]];
-                    nums[nums[i]] = nums[i];
-                    nums[i] = temp;
-                }
+                std::swap(nums[i], nums[nums[i]]);
             }
         }
-        return -1;
+        return {};
     }
 };
 

@@ -5,16 +5,35 @@
 #ifndef LEETCODE_Q35_HH
 #define LEETCODE_Q35_HH
 
+#include <unordered_map>
+
+class Node {
+public:
+    int val;
+    Node *next;
+    Node *random;
+
+    Node(int _val)
+    {
+        val = _val;
+        next = nullptr;
+        random = nullptr;
+    }
+};
+
 class Solution {
 public:
     Node *copyRandomList(Node *head)
     {
-        if (!head) return nullptr;
+        if (!head)
+            return nullptr;
+
         if (!m_map.contains(head)) {
-            Node *ret = new Node(head->val);
-            m_map[head] = ret;
-            ret->next = copyRandomList(head->next);
-            ret->random = copyRandomList(head->random);
+            auto new_node = new Node(head->val);
+            m_map[head] = new_node;
+            new_node->next = copyRandomList(head->next);
+            new_node->random = copyRandomList(head->random);
+            return new_node;
         }
 
         return m_map[head];

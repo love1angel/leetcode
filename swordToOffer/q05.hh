@@ -5,30 +5,32 @@
 #ifndef LEETCODE_Q05_HH
 #define LEETCODE_Q05_HH
 
+#include <string>
+
 class Solution {
 public:
-    string replaceSpace(string s)
+    std::string replaceSpace(std::string s)
     {
-        int cnt = 0, before = s.size();
+        size_t cnt = 0;
         for (const auto ch: s) {
-            if (ch == ' ') {
+            if (ch == ' ')
                 ++cnt;
-            }
         }
 
-        int after = before + 2 * cnt;
-        s.resize(after);
-
-        for (--before, --after; before < after; --before) {
-            if (s[before] == ' ') {
-                s[after--] = '0';
-                s[after--] = '2';
-                s[after--] = '%';
+        auto before_size = s.size(), after_idx = before_size + 2 * cnt - 1;
+        s.resize(after_idx + 1);
+        for (auto i = before_size - 1; cnt > 0; --i) {
+            if (s[i] == ' ') {
+                --cnt;
+                s[after_idx] = '0';
+                s[after_idx - 1] = '2';
+                s[after_idx - 2] = '%';
+                after_idx -= 3;
             } else {
-                s[after--] = s[before];
+                s[after_idx] = s[i];
+                --after_idx;
             }
         }
-
         return s;
     }
 };

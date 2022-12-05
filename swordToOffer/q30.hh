@@ -5,6 +5,8 @@
 #ifndef LEETCODE_Q30_HH
 #define LEETCODE_Q30_HH
 
+#include <stack>
+
 class MinStack {
 public:
     MinStack() = default;
@@ -18,7 +20,9 @@ public:
 
     void pop()
     {
-        if (!m_stack.empty() && m_stack.top() == m_min_stack.top())
+        if (m_min_stack.empty())
+            return;
+        if (m_stack.top() == m_min_stack.top())
             m_min_stack.pop();
         m_stack.pop();
     }
