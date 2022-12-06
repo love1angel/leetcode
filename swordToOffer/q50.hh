@@ -5,27 +5,32 @@
 #ifndef LEETCODE_Q50_HH
 #define LEETCODE_Q50_HH
 
+#include <string>
+
 class Solution {
 public:
-    char firstUniqChar(string s)
+    char firstUniqChar(std::string s)
     {
-        int bitMap[26] = {0};
+        int present = 0x00, flag = 0x00;
 
-        for (char ch: s) {
-            ++bitMap[ch - 'a'];
-            m_list.push_back(ch);
+        char queue[26];
+        int size = 0;
+
+        for (auto ch: s) {
+            if (present & 1 << (ch - 'a'))
+                flag |= 1 << (ch - 'a');
+            else
+                queue[size++] = ch;
+            present |= 1 << (ch - 'a');
         }
 
-        for (auto ch: m_list) {
-            if (bitMap[ch - 'a'] == 1)
-                return ch;
+        for (int i = 0; i < size; ++i) {
+            if (!(flag & 1 << (queue[i] - 'a'))) {
+                return queue[i];
+            }
         }
-
         return ' ';
     }
-
-private:
-    std::deque<char> m_list;
 };
 
 #endif //LEETCODE_Q50_HH

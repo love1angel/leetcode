@@ -5,22 +5,23 @@
 #ifndef LEETCODE_Q11_HH
 #define LEETCODE_Q11_HH
 
+#include <vector>
+
 class Solution {
 public:
-    int minArray(vector<int> &numbers)
+    int minArray(std::vector<int> &numbers)
     {
-        int beg = 0, end = numbers.size() - 1;
-        while (beg < end) {
-            int mid = beg + (end - beg) / 2;
-            if (numbers[mid] > numbers[end]) {
-                beg = mid + 1;
-            } else if (numbers[mid] < numbers[end]) {
-                end = mid;
-            } else {
-                --end;
-            }
+        int first = 0, last = numbers.size() - 1;
+        while (first < last) {
+            auto mid = first + (last - first) / 2;
+            if (numbers[mid] < numbers[last])
+                last = mid;
+            else if (numbers[mid] > numbers[last])
+                first = mid + 1;
+            else
+                --last;
         }
-        return numbers[beg];
+        return numbers[first];
     }
 };
 
