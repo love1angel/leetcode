@@ -5,37 +5,50 @@
 #ifndef LEETCODE_Q32_3_HH
 #define LEETCODE_Q32_3_HH
 
+#include <vector>
+#include <deque>
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+
+    TreeNode(int x) : val(x), left(NULL), right(NULL)
+    {}
+};
+
 class Solution {
 public:
-    vector<vector<int>> levelOrder(TreeNode *root)
+    std::vector<std::vector<int>> levelOrder(TreeNode *root)
     {
         if (!root) return {};
+
         std::vector<std::vector<int>> ret;
-        m_deque.push_back(root);
+        std::deque<TreeNode *> queue;
+        queue.push_back(root);
         bool flag = true;
-        while (!m_deque.empty()) {
+        while (!queue.empty()) {
             std::vector<int> each;
-            int size = m_deque.size();
-            for (int i = 0; i < size; ++i) {
-                const auto &node = m_deque[0];
-                each.push_back(node->val);
-                if (node->left) m_deque.push_back(node->left);
-                if (node->right) m_deque.push_back(node->right);
-                m_deque.pop_front();
+            for (int i = 0, cnt = queue.size(); i < cnt; ++i) {
+                const auto &first = queue.front();
+                each.push_back(first->val);
+                if (first->left) queue.push_back(first->left);
+                if (first->right) queue.push_back(first->right);
+                queue.pop_front();
             }
+
             if (!flag) {
-                for (int i = 0; i < size / 2; ++i) {
+                for (int i = 0, size = each.size(); i < size / 2; ++i) {
                     std::swap(each[i], each[size - 1 - i]);
                 }
             }
-            ret.push_back(each);
+
+            ret.emplace_back(std::move(each));
             flag = !flag;
         }
+
         return ret;
     }
-
-private:
-    std::deque<TreeNode *> m_deque;
 };
 
 #endif //LEETCODE_Q32_3_HH
