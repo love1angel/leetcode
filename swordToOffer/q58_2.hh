@@ -18,10 +18,10 @@ public:
     }
 
 private:
-    void exchange(std::string &str, size_t beg, size_t end)
+    void exchange(std::string &s, int beg, int end)
     {
-        for (size_t i = 0; i < (end - beg) / 2; ++i) {
-            std::swap(str[beg + i], str[end - 1 - i]);
+        for (int i = 0; i < (end - beg) / 2; ++i) {
+            std::swap(s[beg + i], s[end - 1 - i]);
         }
     }
 };

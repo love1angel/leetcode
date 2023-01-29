@@ -19,10 +19,10 @@ public:
     {
         ListNode *ret = nullptr;
         while (head) {
-            auto temp = head->next;
+            auto tmp = head->next;
             head->next = ret;
             ret = head;
-            head = temp;
+            head = tmp;
         }
         return ret;
     }

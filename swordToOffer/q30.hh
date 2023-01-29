@@ -20,7 +20,7 @@ public:
 
     void pop()
     {
-        if (m_min_stack.empty())
+        if (m_stack.empty())
             return;
         if (m_stack.top() == m_min_stack.top())
             m_min_stack.pop();
