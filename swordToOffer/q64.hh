@@ -14,4 +14,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q64_HH
+#endif // LEETCODE_Q64_HH

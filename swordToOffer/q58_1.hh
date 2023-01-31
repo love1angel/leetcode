@@ -24,4 +24,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q58_1_HH
+#endif // LEETCODE_Q58_1_HH

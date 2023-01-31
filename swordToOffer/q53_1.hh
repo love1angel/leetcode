@@ -11,35 +11,30 @@ class Solution {
 public:
     int search(std::vector<int>& nums, int target)
     {
-        auto beg = nums.cbegin(), end = nums.cend();
-        auto mid = beg + (end - beg) / 2;
-        while (mid != end && *mid != target) {
-            if (*mid < target) {
+        int beg = 0, end = nums.size(), mid = beg + (end - beg) / 2;
+        while (mid != end && nums[mid] != target) {
+            if (nums[mid] < target)
                 beg = mid + 1;
-            } else {
+            else
                 end = mid;
-            }
+
             mid = beg + (end - beg) / 2;
         }
 
-        if (mid == end) {
+        if (mid == end)
             return 0;
-        }
 
         int cnt = 1;
-        for (auto i = mid + 1; i < nums.cend(); ++i) {
-            if (*i == target) {
+        for (int i = mid + 1; i < nums.size(); ++i) {
+            if (nums[i] == target)
                 ++cnt;
-            }
         }
-        for (auto i = mid - 1; i >= nums.cbegin(); --i) {
-            if (*i == target) {
+        for (int i = mid - 1; i >= 0; --i) {
+            if (nums[i] == target)
                 ++cnt;
-            }
         }
-
         return cnt;
     }
 };
 
-#endif //LEETCODE_Q53_1_HH
+#endif // LEETCODE_Q53_1_HH

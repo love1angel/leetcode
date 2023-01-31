@@ -23,4 +23,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q18_HH
+#endif // LEETCODE_Q18_HH

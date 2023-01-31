@@ -35,4 +35,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q05_HH
+#endif // LEETCODE_Q05_HH

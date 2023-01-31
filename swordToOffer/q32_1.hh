@@ -45,4 +45,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q32_1_HH
+#endif // LEETCODE_Q32_1_HH

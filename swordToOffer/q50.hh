@@ -33,4 +33,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q50_HH
+#endif // LEETCODE_Q50_HH

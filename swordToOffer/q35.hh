@@ -43,4 +43,4 @@ private:
     std::unordered_map<Node*, Node*> m_map;
 };
 
-#endif //LEETCODE_Q35_HH
+#endif // LEETCODE_Q35_HH

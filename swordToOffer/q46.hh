@@ -24,4 +24,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q46_HH
+#endif // LEETCODE_Q46_HH

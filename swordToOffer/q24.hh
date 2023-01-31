@@ -31,4 +31,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q24_HH
+#endif // LEETCODE_Q24_HH

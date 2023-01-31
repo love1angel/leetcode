@@ -30,4 +30,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q04_HH
+#endif // LEETCODE_Q04_HH

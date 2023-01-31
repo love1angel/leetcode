@@ -9,10 +9,11 @@
 
 class Solution {
 public:
-    int findRepeatNumber(std::vector<int>& nums)
+    int
+    findRepeatNumber(std::vector<int>& nums)
     {
-        for (int i = 0; i < nums.size();) {
-            if (nums[i] == i) {
+        for (int i = 0;;) {
+            if (i == nums[i]) {
                 ++i;
                 continue;
             } else {
@@ -21,8 +22,8 @@ public:
                 std::swap(nums[i], nums[nums[i]]);
             }
         }
-        return {};
+        return -1;
     }
 };
 
-#endif //LEETCODE_Q03_HH
+#endif // LEETCODE_Q03_HH

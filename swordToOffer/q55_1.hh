@@ -15,4 +15,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q55_1_HH
+#endif // LEETCODE_Q55_1_HH

@@ -37,4 +37,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q06_HH
+#endif // LEETCODE_Q06_HH

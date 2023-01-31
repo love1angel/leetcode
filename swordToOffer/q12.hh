@@ -36,4 +36,4 @@ private:
     }
 };
 
-#endif //LEETCODE_Q12_HH
+#endif // LEETCODE_Q12_HH

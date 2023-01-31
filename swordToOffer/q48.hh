@@ -35,4 +35,4 @@ private:
     std::unordered_map<char, int> m_map;
 };
 
-#endif //LEETCODE_Q48_HH
+#endif // LEETCODE_Q48_HH

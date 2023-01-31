@@ -21,4 +21,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q52_HH
+#endif // LEETCODE_Q52_HH

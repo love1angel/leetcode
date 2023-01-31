@@ -27,4 +27,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q47_HH
+#endif // LEETCODE_Q47_HH

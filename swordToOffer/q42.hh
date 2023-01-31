@@ -18,4 +18,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q42_HH
+#endif // LEETCODE_Q42_HH

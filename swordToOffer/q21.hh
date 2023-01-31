@@ -21,4 +21,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q21_HH
+#endif // LEETCODE_Q21_HH

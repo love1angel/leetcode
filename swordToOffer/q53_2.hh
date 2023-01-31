@@ -12,7 +12,7 @@ public:
     int missingNumber(std::vector<int>& nums)
     {
         int beg = 0, end = nums.size(), mid = beg + (end - beg) / 2;
-        while (mid != end) {
+        while (mid < end) {
             if (nums[mid] == mid) {
                 beg = mid + 1;
             } else {
@@ -24,4 +24,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q53_2_HH
+#endif // LEETCODE_Q53_2_HH

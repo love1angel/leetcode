@@ -25,4 +25,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q25_HH
+#endif // LEETCODE_Q25_HH

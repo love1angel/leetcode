@@ -22,4 +22,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q10_1_HH
+#endif // LEETCODE_Q10_1_HH

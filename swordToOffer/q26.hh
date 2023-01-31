@@ -23,4 +23,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q26_HH
+#endif // LEETCODE_Q26_HH

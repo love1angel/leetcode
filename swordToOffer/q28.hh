@@ -20,4 +20,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q28_HH
+#endif // LEETCODE_Q28_HH

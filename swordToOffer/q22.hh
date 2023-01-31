@@ -27,4 +27,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q22_HH
+#endif // LEETCODE_Q22_HH
