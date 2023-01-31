@@ -9,7 +9,7 @@ class Solution {
 public:
     int translateNum(int num)
     {
-        int dp[3] = {0, 1, 1};
+        int dp[3] = { 0, 1, 1 };
         std::string s = std::to_string(num);
         for (int i = 1; i < s.size(); ++i) {
             dp[0] = dp[1];

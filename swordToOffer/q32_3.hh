@@ -5,35 +5,42 @@
 #ifndef LEETCODE_Q32_3_HH
 #define LEETCODE_Q32_3_HH
 
-#include <vector>
 #include <deque>
+#include <vector>
 
 struct TreeNode {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode* left;
+    TreeNode* right;
 
-    TreeNode(int x) : val(x), left(NULL), right(NULL)
-    {}
+    TreeNode(int x)
+        : val(x)
+        , left(NULL)
+        , right(NULL)
+    {
+    }
 };
 
 class Solution {
 public:
-    std::vector<std::vector<int>> levelOrder(TreeNode *root)
+    std::vector<std::vector<int>> levelOrder(TreeNode* root)
     {
-        if (!root) return {};
+        if (!root)
+            return {};
 
         std::vector<std::vector<int>> ret;
-        std::deque<TreeNode *> queue;
+        std::deque<TreeNode*> queue;
         queue.push_back(root);
         bool flag = true;
         while (!queue.empty()) {
             std::vector<int> each;
             for (int i = 0, cnt = queue.size(); i < cnt; ++i) {
-                const auto &first = queue.front();
+                const auto& first = queue.front();
                 each.push_back(first->val);
-                if (first->left) queue.push_back(first->left);
-                if (first->right) queue.push_back(first->right);
+                if (first->left)
+                    queue.push_back(first->left);
+                if (first->right)
+                    queue.push_back(first->right);
                 queue.pop_front();
             }
 

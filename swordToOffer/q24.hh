@@ -7,17 +7,20 @@
 
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
 
-    ListNode(int x) : val(x), next(nullptr)
-    {}
+    ListNode(int x)
+        : val(x)
+        , next(nullptr)
+    {
+    }
 };
 
 class Solution {
 public:
-    ListNode *reverseList(ListNode *head)
+    ListNode* reverseList(ListNode* head)
     {
-        ListNode *ret = nullptr;
+        ListNode* ret = nullptr;
         while (head) {
             auto tmp = head->next;
             head->next = ret;

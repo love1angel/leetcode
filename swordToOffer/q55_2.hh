@@ -7,15 +7,16 @@
 
 class Solution {
 public:
-    bool isBalanced(TreeNode *root)
+    bool isBalanced(TreeNode* root)
     {
         return height(root) >= 0;
     }
 
 private:
-    int height(TreeNode *root)
+    int height(TreeNode* root)
     {
-        if (!root) return 0;
+        if (!root)
+            return 0;
         auto left = height(root->left);
         auto right = height(root->right);
         if (left == -1 || right == -1 || std::abs(left - right) > 1)

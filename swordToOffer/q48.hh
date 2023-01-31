@@ -12,7 +12,7 @@ public:
         // dp[0]: current beg
         // dp[1]: current length
         // dp[2]: max length
-        int dp[3] = {0, 0, 0};
+        int dp[3] = { 0, 0, 0 };
         for (int i = 0; i < s.size(); ++i) {
             if (!m_map.contains(s[i])) {
                 ++dp[1];

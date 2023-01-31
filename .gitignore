@@ -3,6 +3,9 @@ cmake-build-debug
 .idea
 build
 
+# vscode
+.vscode
+
 # Prerequisites
 *.d
 

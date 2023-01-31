@@ -8,12 +8,14 @@
 #include <vector>
 
 class Solution {
-    template<typename T>
+    template <typename T>
     using Matrix = std::vector<std::vector<T>>;
+
 public:
-    bool findNumberIn2DArray(Matrix<int> const &matrix, int target)
+    bool findNumberIn2DArray(Matrix<int> const& matrix, int target)
     {
-        if (matrix.empty()) return false;
+        if (matrix.empty())
+            return false;
         int i = 0, j = matrix[0].size() - 1;
         while (i < matrix.size() && j >= 0) {
             if (matrix[i][j] == target)

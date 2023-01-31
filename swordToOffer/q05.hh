@@ -12,7 +12,7 @@ public:
     std::string replaceSpace(std::string s)
     {
         int cnt = 0;
-        for (auto &&ch: s) {
+        for (auto&& ch : s) {
             if (' ' == ch) {
                 ++cnt;
             }

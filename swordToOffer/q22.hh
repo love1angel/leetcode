@@ -7,7 +7,7 @@
 
 class Solution {
 public:
-    ListNode *getKthFromEnd(ListNode *head, int k)
+    ListNode* getKthFromEnd(ListNode* head, int k)
     {
         auto fast = head, slow = head;
 

@@ -9,7 +9,7 @@
 
 class Solution {
 public:
-    int missingNumber(std::vector<int> &nums)
+    int missingNumber(std::vector<int>& nums)
     {
         int beg = 0, end = nums.size(), mid = beg + (end - beg) / 2;
         while (mid != end) {

@@ -7,17 +7,16 @@
 
 class Solution {
 public:
-    bool isSymmetric(TreeNode *root)
+    bool isSymmetric(TreeNode* root)
     {
         return recur(root, root);
     }
 
-    bool recur(TreeNode *left, TreeNode *right)
+    bool recur(TreeNode* left, TreeNode* right)
     {
-        if (!left && !right) return true;
-        return (left && right) && left->val == right->val &&
-               recur(left->left, right->right) &&
-               recur(left->right, right->left);
+        if (!left && !right)
+            return true;
+        return (left && right) && left->val == right->val && recur(left->left, right->right) && recur(left->right, right->left);
     }
 };
 

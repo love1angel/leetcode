@@ -10,8 +10,8 @@
 class Node {
 public:
     int val;
-    Node *next;
-    Node *random;
+    Node* next;
+    Node* random;
 
     Node(int _val)
     {
@@ -23,7 +23,7 @@ public:
 
 class Solution {
 public:
-    Node *copyRandomList(Node *head)
+    Node* copyRandomList(Node* head)
     {
         if (!head)
             return nullptr;
@@ -40,7 +40,7 @@ public:
     }
 
 private:
-    std::unordered_map<Node *, Node *> m_map;
+    std::unordered_map<Node*, Node*> m_map;
 };
 
 #endif //LEETCODE_Q35_HH

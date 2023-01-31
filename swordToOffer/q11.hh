@@ -9,7 +9,7 @@
 
 class Solution {
 public:
-    int minArray(std::vector<int> &numbers)
+    int minArray(std::vector<int>& numbers)
     {
         int first = 0, last = numbers.size() - 1;
         while (first < last) {

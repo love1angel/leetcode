@@ -7,7 +7,7 @@
 
 class Solution {
 public:
-    ListNode *deleteNode(ListNode *head, int val)
+    ListNode* deleteNode(ListNode* head, int val)
     {
         ListNode temp(0);
         temp.next = head;

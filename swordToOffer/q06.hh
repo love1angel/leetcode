@@ -9,17 +9,20 @@
 
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
 
-    ListNode(int x) : val(x), next(nullptr)
-    {}
+    ListNode(int x)
+        : val(x)
+        , next(nullptr)
+    {
+    }
 };
 
 class Solution {
 public:
-    std::vector<int> reversePrint(ListNode *head)
+    std::vector<int> reversePrint(ListNode* head)
     {
-        std::vector<int> ret{};
+        std::vector<int> ret {};
         while (head) {
             ret.push_back(head->val);
             head = head->next;

@@ -7,10 +7,10 @@
 
 class Solution {
 public:
-    int maxProfit(vector<int> &prices)
+    int maxProfit(vector<int>& prices)
     {
         int cur_max = 0, min = INT_MAX;
-        for (const auto &price: prices) {
+        for (const auto& price : prices) {
             if (price < min) {
                 min = price;
                 continue;

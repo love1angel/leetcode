@@ -9,7 +9,7 @@
 
 class Solution {
 public:
-    int findRepeatNumber(std::vector<int> &nums)
+    int findRepeatNumber(std::vector<int>& nums)
     {
         for (int i = 0; i < nums.size();) {
             if (nums[i] == i) {

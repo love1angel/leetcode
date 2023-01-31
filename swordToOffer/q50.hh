@@ -16,7 +16,7 @@ public:
         char queue[26];
         int size = 0;
 
-        for (auto ch: s) {
+        for (auto ch : s) {
             if (present & 1 << (ch - 'a'))
                 flag |= 1 << (ch - 'a');
             else

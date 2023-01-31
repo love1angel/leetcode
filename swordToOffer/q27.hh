@@ -7,9 +7,10 @@
 
 class Solution {
 public:
-    TreeNode *mirrorTree(TreeNode *root)
+    TreeNode* mirrorTree(TreeNode* root)
     {
-        if (!root) return nullptr;
+        if (!root)
+            return nullptr;
         mirrorTree(root->left);
         mirrorTree(root->right);
         std::swap(root->left, root->right);

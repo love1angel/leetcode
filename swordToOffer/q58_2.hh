@@ -18,7 +18,7 @@ public:
     }
 
 private:
-    void exchange(std::string &s, int beg, int end)
+    void exchange(std::string& s, int beg, int end)
     {
         for (int i = 0; i < (end - beg) / 2; ++i) {
             std::swap(s[beg + i], s[end - 1 - i]);
