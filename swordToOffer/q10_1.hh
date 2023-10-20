@@ -5,20 +5,21 @@
 #ifndef LEETCODE_Q10_1_HH
 #define LEETCODE_Q10_1_HH
 
+#include <tuple>
+
 class Solution {
 public:
     int fib(int n)
     {
         if (n < 2)
             return n;
-        int bef = 0, next = 1;
+
+        int n_1 = 0, n_2 = 1;
         for (int i = 1; i < n; ++i) {
-            int temp = next;
-            next += bef;
-            next %= 1000000007;
-            bef = temp;
+            std::tie(n_1, n_2) = std::make_tuple(n_2 % 1000000007, (n_1 + n_2) % 1000000007);
         }
-        return next;
+
+        return n_2;
     }
 };
 

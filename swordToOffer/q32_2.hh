@@ -27,25 +27,22 @@ public:
     {
         if (!root)
             return {};
-
         std::vector<std::vector<int>> ret;
-        std::deque<TreeNode*> list;
-        list.push_back(root);
-        while (!list.empty()) {
-            auto cnt = list.size();
+        std::deque<TreeNode*> queue { root };
+        while (!queue.empty()) {
+            const auto size = queue.size();
             std::vector<int> each;
-            for (int i = 0; i < cnt; ++i) {
-                const auto& first = list.front();
-                each.push_back(first->val);
-                if (first->left)
-                    list.push_back(first->left);
-                if (first->right)
-                    list.push_back(first->right);
-                list.pop_front();
+            for (decltype(queue.size()) i = 0; i < size; ++i) {
+                const auto& head = queue.front();
+                each.push_back(head->val);
+                if (head->left)
+                    queue.push_back(head->left);
+                if (head->right)
+                    queue.push_back(head->right);
+                queue.pop_front();
             }
             ret.emplace_back(std::move(each));
         }
-
         return ret;
     }
 };

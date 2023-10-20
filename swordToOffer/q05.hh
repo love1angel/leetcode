@@ -11,24 +11,25 @@ class Solution {
 public:
     std::string replaceSpace(std::string s)
     {
-        int cnt = 0;
+        auto space_num = 0;
         for (auto&& ch : s) {
-            if (' ' == ch) {
-                ++cnt;
+            if (ch == ' ') {
+                ++space_num;
             }
         }
+        int before = s.size(), after = before + 2 * space_num;
+        s.resize(after);
 
-        int size = s.size();
-        s.resize(size + 2 * cnt);
-
-        for (int i = size - 1; cnt > 0; --i) {
-            if (' ' != s[i]) {
-                s[i + 2 * cnt] = s[i];
+        for (; space_num;) {
+            --before, --after;
+            if (s[before] == ' ') {
+                s[after] = '0';
+                s[after - 1] = '2';
+                s[after - 2] = '%';
+                after -= 2;
+                --space_num;
             } else {
-                s[i + 2 * cnt] = '0';
-                s[i + 2 * cnt - 1] = '2';
-                s[i + 2 * cnt - 2] = '%';
-                --cnt;
+                s[after] = s[before];
             }
         }
         return s;

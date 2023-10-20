@@ -25,21 +25,20 @@ class Solution {
 public:
     std::vector<int> levelOrder(TreeNode* root)
     {
-        if (!root)
+        if (not root)
             return {};
         std::vector<int> ret;
-        std::deque<TreeNode*> queue;
-        queue.push_back(root);
+        std::deque<TreeNode*> queue { root };
 
-        while (!queue.empty()) {
-            const auto& first = queue.front();
-            ret.push_back(first->val);
-            if (first->left)
-                queue.push_back(first->left);
-            if (first->right)
-                queue.push_back(first->right);
+        do {
+            const auto& head = queue.front();
+            ret.push_back(head->val);
+            if (head->left)
+                queue.push_back(head->left);
+            if (head->right)
+                queue.push_back(head->right);
             queue.pop_front();
-        }
+        } while (!queue.empty());
 
         return ret;
     }

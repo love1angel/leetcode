@@ -27,33 +27,30 @@ public:
     {
         if (!root)
             return {};
-
+        std::deque<TreeNode*> queue { root };
         std::vector<std::vector<int>> ret;
-        std::deque<TreeNode*> queue;
-        queue.push_back(root);
+
         bool flag = true;
         while (!queue.empty()) {
+            const auto size = queue.size();
             std::vector<int> each;
-            for (int i = 0, cnt = queue.size(); i < cnt; ++i) {
-                const auto& first = queue.front();
-                each.push_back(first->val);
-                if (first->left)
-                    queue.push_back(first->left);
-                if (first->right)
-                    queue.push_back(first->right);
+            for (decltype(queue.size()) i = 0; i < size; ++i) {
+                const auto& head = queue.front();
+                each.push_back(head->val);
+                if (head->left)
+                    queue.push_back(head->left);
+                if (head->right)
+                    queue.push_back(head->right);
                 queue.pop_front();
             }
-
             if (!flag) {
-                for (int i = 0, size = each.size(); i < size / 2; ++i) {
+                for (int i = 0; i < size / 2; ++i) {
                     std::swap(each[i], each[size - 1 - i]);
                 }
             }
-
             ret.emplace_back(std::move(each));
             flag = !flag;
         }
-
         return ret;
     }
 };

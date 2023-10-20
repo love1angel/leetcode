@@ -11,21 +11,19 @@ class Solution {
 public:
     char firstUniqChar(std::string s)
     {
-        int present = 0x00, flag = 0x00;
-
+        std::uint32_t flag = 0x00, dul = 0x00;
         char queue[26];
         int size = 0;
-
-        for (auto ch : s) {
-            if (present & 1 << (ch - 'a'))
-                flag |= 1 << (ch - 'a');
-            else
+        for (auto&& ch : s) {
+            if (!(flag & 1 << ch - 'a')) [[unlikely]] {
                 queue[size++] = ch;
-            present |= 1 << (ch - 'a');
+                flag |= 1 << ch - 'a';
+            } else [[likely]] {
+                dul |= 1 << ch - 'a';
+            }
         }
-
         for (int i = 0; i < size; ++i) {
-            if (!(flag & 1 << (queue[i] - 'a'))) {
+            if (!(dul & 1 << queue[i] - 'a')) {
                 return queue[i];
             }
         }

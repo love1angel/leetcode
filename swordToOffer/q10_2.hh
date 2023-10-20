@@ -5,20 +5,17 @@
 #ifndef LEETCODE_Q10_2_HH
 #define LEETCODE_Q10_2_HH
 
+#include <tuple>
+
 class Solution {
 public:
     int numWays(int n)
     {
-        if (n < 1)
-            return 1;
-        int n_2 = 1, n_1 = 1;
-        for (int i = 2; i <= n; ++i) {
-            int temp = n_1;
-            n_1 += n_2;
-            n_1 %= 1000000007;
-            n_2 = temp;
+        int n_1 = 0, n_2 = 1;
+        for (int i = 0; i < n; ++i) {
+            std::tie(n_1, n_2) = std::make_tuple(n_2 % 1000000007, (n_1 + n_2) % 1000000007);
         }
-        return n_1;
+        return n_2;
     }
 };
 

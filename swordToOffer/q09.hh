@@ -18,18 +18,24 @@ public:
 
     int deleteHead()
     {
-        if (m_del_stack.empty()) {
-            while (!m_add_stack.empty()) {
-                m_del_stack.push(m_add_stack.top());
-                m_add_stack.pop();
-            }
-        }
-
         int ret = -1;
-        if (!m_del_stack.empty()) {
+
+        if (m_del_stack.empty()) {
+            if (m_add_stack.empty()) {
+                return ret;
+            } else {
+                do {
+                    m_del_stack.push(m_add_stack.top());
+                    m_add_stack.pop();
+                } while (!m_add_stack.empty());
+                ret = m_del_stack.top();
+                m_del_stack.pop();
+            }
+        } else {
             ret = m_del_stack.top();
             m_del_stack.pop();
         }
+
         return ret;
     }
 
