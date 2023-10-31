@@ -6,7 +6,8 @@ using std::vector;
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    int search(vector<int>& nums, int target)
+    {
         int beg = 0, end = nums.size(), mid = end / 2;
         while (mid != end && nums[mid] != target) {
             if (nums[mid] < target) {
