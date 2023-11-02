@@ -5,4 +5,4 @@
 #ifndef LEETCODE_Q1260_HH
 #define LEETCODE_Q1260_HH
 
-#endif //LEETCODE_Q1260_HH
+#endif // LEETCODE_Q1260_HH

@@ -9,7 +9,7 @@ public:
     int secondHighest(std::string s)
     {
         char first = CHAR_MIN, second = CHAR_MIN;
-        for (auto ch: s) {
+        for (auto ch : s) {
             if (std::isdigit(ch)) {
                 if (first < ch) {
                     second = first;

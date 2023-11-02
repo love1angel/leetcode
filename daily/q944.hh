@@ -7,7 +7,7 @@
 
 class Solution {
 public:
-    int minDeletionSize(vector <string> &strs)
+    int minDeletionSize(vector<string>& strs)
     {
         int row = strs.size(), col = strs[0].length(), ret = 0;
         for (int j = 0; j < col; ++j) {
@@ -22,4 +22,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q944_HH
+#endif // LEETCODE_Q944_HH

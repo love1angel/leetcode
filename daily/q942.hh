@@ -19,4 +19,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q942_HH
+#endif // LEETCODE_Q942_HH

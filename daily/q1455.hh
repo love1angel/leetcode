@@ -10,7 +10,8 @@ public:
     int isPrefixOfWord(string sentence, string searchWord)
     {
         int off_set = 0, off_max = searchWord.size(), word_cnt = 1;
-        if (off_max == 1 && sentence[0] == ' ') return -1;
+        if (off_max == 1 && sentence[0] == ' ')
+            return -1;
 
         bool flag = true;
         for (int i = 0; i < sentence.size(); ++i) {
@@ -32,4 +33,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q1455_HH
+#endif // LEETCODE_Q1455_HH

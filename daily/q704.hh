@@ -7,7 +7,7 @@
 
 class Solution {
 public:
-    int search(vector<int> &nums, int target)
+    int search(vector<int>& nums, int target)
     {
         auto start = 0UL, end = nums.size();
         auto mid = start + (end - start) / 2;
@@ -25,4 +25,4 @@ public:
     }
 };
 
-#endif //LEETCODE_Q704_HH
+#endif // LEETCODE_Q704_HH
