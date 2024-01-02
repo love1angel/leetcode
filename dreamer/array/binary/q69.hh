@@ -1,24 +1,18 @@
-#pragma once
-
 class Solution {
 public:
     int mySqrt(int x)
     {
-        if (x <= 1)
-            return x;
-
-        int left = 1, right = x / 2 + 1;
-        while (right - left > 1) {
-            int mid = left + ((right - left) >> 1);
-            auto ret = (long long)mid * mid;
-            if (ret == x) {
+        int left = 0, right = x / 2 + 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            long long ret = (long long)mid * mid;
+            if (ret < x)
+                left = mid + 1;
+            else if (ret > x)
+                right = mid - 1;
+            else
                 return mid;
-            } else if (ret > x) {
-                right = mid;
-            } else {
-                left = mid;
-            }
         }
-        return left;
+        return left - 1;
     }
 };
