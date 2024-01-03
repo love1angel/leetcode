@@ -1,18 +1,13 @@
-#pragma once
-
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums)
     {
-        int current = nums[0], cnt = 1;
-        for (int i = 1; i < nums.size(); ++i) {
-            if (nums[i] == current) {
-                continue;
-            } else {
-                nums[cnt++] = nums[i];
-                current = nums[i];
+        int before {};
+        for (int cur = 1; cur < nums.size(); ++cur) {
+            if (nums[cur] != nums[before]) {
+                nums[++before] = nums[cur];
             }
         }
-        return cnt;
+        return before + 1;
     }
 };

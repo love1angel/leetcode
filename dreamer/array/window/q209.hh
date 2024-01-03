@@ -1,23 +1,21 @@
-#pragma once
-
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums)
     {
-        int min = std::numeric_limits<int>::max();
-        int start = 0, sum = 0;
-        for (int end = 0; end < nums.size(); ++end) {
-            sum += nums[end];
+        int left {}, sum {}, min = std::numeric_limits<int>::max();
+
+        for (int right = 0; right < nums.size(); ++right) {
+            sum += nums[right];
             if (sum >= target) {
-                min = std::min(min, end - start + 1);
+                min = std::min(min, right - left + 1);
                 do {
-                    sum -= nums[start++];
-                } while (sum >= target && (min = std::min(min, end - start + 1), 1));
+                    sum -= nums[left++];
+                } while (sum >= target && (min = std::min(min, right - left + 1), 1));
             }
         }
-        if (min == std::numeric_limits<int>::max()) {
+
+        if (min == std::numeric_limits<int>::max())
             return 0;
-        }
         return min;
     }
 };
