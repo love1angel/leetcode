@@ -4,17 +4,16 @@ class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val)
     {
-        ListNode pre { 0, head };
-        ListNode* each = &pre;
-
-        while (each->next) {
-            if (each->next->val == val) {
-                each->next = each->next->next;
+        ListNode** pp = &head;
+        ListNode* entry = head;
+        while (entry) {
+            if (entry->val == val) {
+                *pp = entry->next;
             } else {
-                each = each->next;
+                pp = &entry->next;
             }
+            entry = entry->next;
         }
-
-        return pre.next;
+        return head;
     }
 };
