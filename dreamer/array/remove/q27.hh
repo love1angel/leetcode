@@ -2,12 +2,12 @@ class Solution {
 public:
     int removeElement(vector<int>& nums, int val)
     {
-        int cur {};
-        for (int i = 0; i < nums.size(); ++i) {
-            if (nums[i] != val)
-                nums[cur++] = nums[i];
+        int len { 0 };
+        for (auto num : nums) {
+            if (num != val)
+                nums[len++] = num;
         }
-        return cur;
+        return len;
     }
 };
 
@@ -18,17 +18,15 @@ class Solution {
 public:
     int removeElement(vector<int>& nums, int val)
     {
-        int left {}, right = nums.size() - 1;
-
+        int left { 0 }, right = nums.size() - 1;
         while (left <= right) {
             while (left <= right && nums[left] != val)
                 ++left;
-            while (left <= right && nums[right] == val)
+            while (right >= left && nums[right] == val)
                 --right;
-            if (left <= right)
-                std::swap(nums[left], nums[right]);
+            if (left < right) // < ? <=
+                std::swap(nums[left++], nums[right--]);
         }
-
         return left;
     }
 };

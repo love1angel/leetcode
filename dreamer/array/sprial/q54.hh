@@ -3,35 +3,45 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix)
     {
         std::vector<int> ret {};
-        ret.reserve(std::max(matrix.size() * matrix.size(), matrix[0].size() * matrix[0].size()));
+        int m = matrix.size(), n = matrix[0].size(), total { m * n };
+        ret.reserve(total);
 
-        int left { 0 }, right = matrix[0].size() - 1, bottom { 0 }, top = matrix.size() - 1;
-        int cur[2] { 0, 0 };
+        int x { 0 }, y { 0 }, cnt { 0 };
+        int top { m - 1 }, below { 0 }, left { 0 }, right { n - 1 };
 
-        for (int i = 0; i <= std::min(matrix.size(), matrix[0].size()) / 2; ++i) {
-            for (int& m_0 = cur[1]; m_0 <= right; ++m_0) {
-                ret.push_back(matrix[cur[0]][m_0]);
+        while (true) {
+            while (y <= right) {
+                ret.push_back(matrix[x][y]);
+                ++y, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            ++cur[0], --cur[1];
+            ++x, --y, ++below;
 
-            for (int& m_0 = cur[0]; m_0 <= top; ++m_0) {
-                ret.push_back(matrix[m_0][cur[1]]);
+            while (x <= top) {
+                ret.push_back(matrix[x][y]);
+                ++x, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            --cur[0], --cur[1];
+            --x, --y, --right;
 
-            for (int& m_0 = cur[1]; m_0 >= left; --m_0) {
-                ret.push_back(matrix[cur[0]][m_0]);
+            while (y >= left) {
+                ret.push_back(matrix[x][y]);
+                --y, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            --cur[0], ++cur[1];
+            --x, ++y, --top;
 
-            for (int& m_0 = cur[0]; m_0 > bottom; --m_0) {
-                ret.push_back(matrix[m_0][cur[1]]);
+            while (x >= below) {
+                ret.push_back(matrix[x][y]);
+                --x, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            ++cur[0], ++cur[1];
-            ++left, ++bottom, --right, --top;
+            ++x, ++y, ++left;
         }
-
-        ret.resize(matrix.size() * matrix[0].size());
         return ret;
     }
 };

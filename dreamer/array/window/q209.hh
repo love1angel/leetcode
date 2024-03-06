@@ -2,20 +2,20 @@ class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums)
     {
-        int left {}, sum {}, min = std::numeric_limits<int>::max();
+        int left { 0 }, cnt { 0 }, len { std::numeric_limits<int>::max() };
 
-        for (int right = 0; right < nums.size(); ++right) {
-            sum += nums[right];
-            if (sum >= target) {
-                min = std::min(min, right - left + 1);
-                do {
-                    sum -= nums[left++];
-                } while (sum >= target && (min = std::min(min, right - left + 1), 1));
+        for (int i { 0 }; i < nums.size(); ++i) {
+            cnt += nums[i];
+            while (cnt >= target) {
+                len = std::min(len, i - left + 1);
+                cnt -= nums[left];
+                ++left;
             }
         }
 
-        if (min == std::numeric_limits<int>::max())
+        if (len == std::numeric_limits<int>::max())
             return 0;
-        return min;
+
+        return len;
     }
 };

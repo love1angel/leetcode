@@ -2,26 +2,60 @@ class Solution {
 public:
     bool backspaceCompare(string s, string t)
     {
-        int left = replace(s), right = replace(t);
-        if (left != right)
-            return false;
-        for (int i = 0; i < left; ++i) {
-            if (s[i] != t[i])
-                return false;
-        }
-        return true;
+        return build(s) == build(t);
     }
 
 private:
-    int replace(std::string& s)
+    std::string build(const std::string& s)
     {
-        int cur = 0;
-        for (int i = 0; i < s.size(); ++i) {
-            if (s[i] != '#')
-                s[cur++] = s[i];
-            else
-                cur = std::max(0, cur - 1);
+        std::string ret;
+        for (auto ch : s) {
+            if (ch != '#')
+                ret.push_back(ch);
+            else if (!ret.empty())
+                ret.pop_back();
         }
-        return cur;
+        return ret;
+    }
+};
+
+class Solution {
+public:
+    bool backspaceCompare(string s, string t)
+    {
+        int i = s.size() - 1, j = t.size() - 1;
+        int i_skip { 0 }, j_skip { 0 };
+
+        while (i >= 0 || j >= 0) {
+            while (i >= 0) {
+                if (s[i] == '#')
+                    ++i_skip, --i;
+                else if (i_skip > 0)
+                    --i_skip, --i;
+                else
+                    break;
+            }
+
+            while (j >= 0) {
+                if (t[j] == '#')
+                    ++j_skip, --j;
+                else if (j_skip > 0)
+                    --j_skip, --j;
+                else
+                    break;
+            }
+
+            if (i < 0 && j < 0)
+                return true;
+            else if (i < 0 || j < 0)
+                return false;
+            else {
+                if (s[i] != t[j])
+                    return false;
+                else
+                    --i, --j;
+            }
+        }
+        return true;
     }
 };

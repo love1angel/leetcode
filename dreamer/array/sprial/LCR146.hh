@@ -2,39 +2,48 @@ class Solution {
 public:
     vector<int> spiralArray(vector<vector<int>>& array)
     {
-        if (!array.size()) {
+        if (array.size() == 0)
             return {};
-        }
+
         std::vector<int> ret {};
-        ret.reserve(std::max(array.size() * array.size(), array[0].size() * array[0].size()));
+        int left { 0 }, right = array[0].size() - 1, below { 0 }, top = array.size() - 1;
+        int x { 0 }, y { 0 }, cnt { 0 }, total { (right + 1) * (top + 1) };
 
-        int left { 0 }, right = array[0].size() - 1, bottom { 0 }, top = array.size() - 1;
-        int cur[2] { 0, 0 };
+        ret.reserve(total);
 
-        for (int i = 0; i <= std::min(array.size(), array[0].size()) / 2; ++i) {
-            for (int& m_0 = cur[1]; m_0 <= right; ++m_0) {
-                ret.push_back(array[cur[0]][m_0]);
+        while (true) {
+            while (y <= right) {
+                ret.push_back(array[x][y]);
+                ++y, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            ++cur[0], --cur[1];
+            ++x, --y, ++below;
 
-            for (int& m_0 = cur[0]; m_0 <= top; ++m_0) {
-                ret.push_back(array[m_0][cur[1]]);
+            while (x <= top) {
+                ret.push_back(array[x][y]);
+                ++x, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            --cur[0], --cur[1];
+            --x, --y, --right;
 
-            for (int& m_0 = cur[1]; m_0 >= left; --m_0) {
-                ret.push_back(array[cur[0]][m_0]);
+            while (y >= left) {
+                ret.push_back(array[x][y]);
+                --y, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            --cur[0], ++cur[1];
+            --x, ++y, --top;
 
-            for (int& m_0 = cur[0]; m_0 > bottom; --m_0) {
-                ret.push_back(array[m_0][cur[1]]);
+            while (x >= below) {
+                ret.push_back(array[x][y]);
+                --x, ++cnt;
+                if (cnt == total)
+                    return ret;
             }
-            ++cur[0], ++cur[1];
-            ++left, ++bottom, --right, --top;
+            ++x, ++y, ++left;
         }
-
-        ret.resize(array.size() * array[0].size());
         return ret;
     }
 };

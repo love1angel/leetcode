@@ -2,18 +2,18 @@ class Solution {
 public:
     string minWindow(string s, string t)
     {
-        int min = std::numeric_limits<int>::max(), min_l {}, min_r {};
+        int min_len { std::numeric_limits<int>::max() }, min_l { 0 }, min_r { 0 };
         std::unordered_map<char, int> fixed;
         for (char ch : t) {
             addChar(fixed, ch);
         }
 
         std::unordered_map<char, int> ths;
-        for (int left {}, right {}; right < s.size(); ++right) {
+        for (int left { 0 }, right { 0 }; right < s.size(); ++right) {
             addChar(ths, s[right]);
             while (larger(ths, fixed)) {
-                if (min > right - left + 1) {
-                    min = right - left + 1;
+                if (min_len > right - left + 1) {
+                    min_len = right - left + 1;
                     min_l = left;
                     min_r = right;
                 }
@@ -22,9 +22,9 @@ public:
             }
         }
 
-        if (min == std::numeric_limits<int>::max())
+        if (min_len == std::numeric_limits<int>::max())
             return {};
-        return s.substr(min_l, min);
+        return s.substr(min_l, min_len);
     }
 
 private:
