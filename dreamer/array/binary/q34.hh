@@ -14,32 +14,30 @@ public:
         }
         if (left > right)
             return { -1, -1 };
-        return { findLeft(nums, left, mid - 1, target), findRight(nums, mid + 1, right, target) };
+        return { searchLeft(nums, left, mid - 1, target), searchRight(nums, mid + 1, right, target) };
     }
 
 private:
-    int findLeft(const std::vector<int>& nums, int left, int right, int target)
+    int searchLeft(const std::vector<int>& nums, int left, int right, int target)
     {
-        int mid { left + (right - left) / 2 };
         while (left <= right) {
+            int mid = left + (right - left) / 2;
             if (nums[mid] < target)
                 left = mid + 1;
             else
                 right = mid - 1;
-            mid = left + (right - left) / 2;
         }
         return left;
     }
 
-    int findRight(const std::vector<int>& nums, int left, int right, int target)
+    int searchRight(const std::vector<int>& nums, int left, int right, int target)
     {
-        int mid { left + (right - left) / 2 };
         while (left <= right) {
-            if (nums[mid] == target)
-                left = mid + 1;
-            else
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > target)
                 right = mid - 1;
-            mid = left + (right - left) / 2;
+            else
+                left = mid + 1;
         }
         return right;
     }
