@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target)
     {
-        int left { 0 }, right = nums.size() - 1, mid { right / 2 };
+        int left { 0 }, right = nums.size() - 1, mid { right >> 1 };
         while (left <= right) {
             if (nums[mid] < target)
                 left = mid + 1;
@@ -10,7 +10,7 @@ public:
                 right = mid - 1;
             else
                 break;
-            mid = left + (right - left) / 2;
+            mid = left + ((right - left) >> 1);
         }
         if (left > right)
             return { -1, -1 };
@@ -21,7 +21,7 @@ private:
     int searchLeft(const std::vector<int>& nums, int left, int right, int target)
     {
         while (left <= right) {
-            int mid = left + (right - left) / 2;
+            int mid { left + ((right - left) >> 1) };
             if (nums[mid] < target)
                 left = mid + 1;
             else
@@ -33,7 +33,7 @@ private:
     int searchRight(const std::vector<int>& nums, int left, int right, int target)
     {
         while (left <= right) {
-            int mid = left + (right - left) / 2;
+            int mid { left + ((right - left) >> 1) };
             if (nums[mid] > target)
                 right = mid - 1;
             else
