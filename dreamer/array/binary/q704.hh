@@ -2,7 +2,7 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int left { 0 }, right = nums.size() - 1;
+        int left { 0 }, right { static_cast<int>(nums.size() - 1) };
         while (left <= right) {
             int mid { left + ((right - left) >> 1) };
             if (nums[mid] < target)
@@ -20,7 +20,7 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int beg { 0 }, end = nums.size();
+        int beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
             int mid { beg + ((end - beg) >> 1) };
             if (nums[mid] < target)
@@ -38,7 +38,7 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int beg { 0 }, end = nums.size(), mid { end >> 1 };
+        int beg { 0 }, end { static_cast<int>(nums.size()) }, mid { end >> 1 };
         while (mid != end && nums[mid] != target) {
             if (nums[mid] < target)
                 beg = mid + 1;

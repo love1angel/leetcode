@@ -2,47 +2,40 @@ class Solution {
 public:
     vector<vector<int>> generateMatrix(int n)
     {
-        std::vector<std::vector<int>> ret(n, std::vector<int>(n, 0));
-
-        int top { n - 1 }, below { 0 }, left { 0 }, right { n - 1 }, cnt { 0 }, total { n * n };
-        int x { 0 }, y { 0 };
-
-        while (true) {
-            while (y <= right) {
-                if (cnt == total)
-                    return ret;
-                ret[x][y] = ++cnt;
-                ++y;
+        std::vector<std::vector<int>> matrix(n, std::vector<int>(n));
+        int left { 0 }, right { n - 1 }, top { n - 1 }, bottom { 0 };
+        int x { 0 }, y { 0 }, cnt { 1 }, loop { n / 2 };
+        while (loop) {
+            while (x <= right) {
+                matrix[y][x] = cnt;
+                ++x, ++cnt;
             }
-            ++x, --y, ++below;
+            --x, ++y, ++bottom;
 
-            while (x <= top) {
-                if (cnt == total)
-                    return ret;
-                ret[x][y] = ++cnt;
-                ++x;
+            while (y <= top) {
+                matrix[y][x] = cnt;
+                ++y, ++cnt;
             }
             --x, --y, --right;
 
-            while (y >= left) {
-                if (cnt == total)
-                    return ret;
-                ret[x][y] = ++cnt;
-                --y;
+            while (x >= left) {
+                matrix[y][x] = cnt;
+                --x, ++cnt;
             }
-            --x, ++y, --top;
+            ++x, --y, --top;
 
-            while (x >= below) {
-                if (cnt == total)
-                    return ret;
-                ret[x][y] = ++cnt;
-                --x;
+            while (y >= bottom) {
+                matrix[y][x] = cnt;
+                --y, ++cnt;
             }
             ++x, ++y, ++left;
-            if (cnt == total)
-                return ret;
+
+            --loop;
         }
 
-        return ret;
+        if (n % 2)
+            matrix[n / 2][n / 2] = cnt;
+
+        return matrix;
     }
 };

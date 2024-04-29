@@ -3,45 +3,41 @@ public:
     vector<int> spiralOrder(vector<vector<int>>& matrix)
     {
         std::vector<int> ret {};
-        int m = matrix.size(), n = matrix[0].size(), total { m * n };
-        ret.reserve(total);
+        int m { static_cast<int>(matrix.size()) }, n { static_cast<int>(matrix[0].size()) };
+        ret.reserve(n * m);
 
-        int x { 0 }, y { 0 }, cnt { 0 };
-        int top { m - 1 }, below { 0 }, left { 0 }, right { n - 1 };
-
-        while (true) {
-            while (y <= right) {
-                ret.push_back(matrix[x][y]);
-                ++y, ++cnt;
-                if (cnt == total)
-                    return ret;
+        int left { 0 }, right { n - 1 }, top { m - 1 }, bottom { 0 };
+        int x { 0 }, y { 0 };
+        while (left <= right && bottom <= top) {
+            while (x <= right) {
+                ret.push_back(matrix[y][x]);
+                ++x;
             }
-            ++x, --y, ++below;
+            --x, ++y, ++bottom;
+            if (bottom > top)
+                break;
 
-            while (x <= top) {
-                ret.push_back(matrix[x][y]);
-                ++x, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (y <= top) {
+                ret.push_back(matrix[y][x]);
+                ++y;
             }
             --x, --y, --right;
+            if (left > right)
+                break;
 
-            while (y >= left) {
-                ret.push_back(matrix[x][y]);
-                --y, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (x >= left) {
+                ret.push_back(matrix[y][x]);
+                --x;
             }
-            --x, ++y, --top;
+            ++x, --y, --top;
 
-            while (x >= below) {
-                ret.push_back(matrix[x][y]);
-                --x, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (y >= bottom) {
+                ret.push_back(matrix[y][x]);
+                --y;
             }
             ++x, ++y, ++left;
         }
+
         return ret;
     }
 };

@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target)
     {
-        int left { 0 }, right = nums.size() - 1, mid { right >> 1 };
+        int left { 0 }, right { static_cast<int>(nums.size() - 1) }, mid { right >> 1 };
         while (left <= right) {
             if (nums[mid] < target)
                 left = mid + 1;

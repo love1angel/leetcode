@@ -4,20 +4,19 @@ public:
     {
         std::vector<int> ret {};
         ret.resize(nums.size());
-
-        int last = nums.size() - 1;
-        int left { 1 }, right = nums.size() - 1;
+        int last { static_cast<int>(ret.size()) - 1 };
 
         int now { nums[0] * nums[0] };
         bool compare_right { true };
 
+        int left { 1 }, right { last };
         while (left <= right) {
             if (compare_right) {
                 int ths { nums[right] * nums[right] };
                 --right;
-                if (now <= ths) {
+                if (now <= ths)
                     ret[last--] = ths;
-                } else {
+                else {
                     ret[last--] = now;
                     now = ths;
                     compare_right = false;
@@ -25,9 +24,9 @@ public:
             } else {
                 int ths { nums[left] * nums[left] };
                 ++left;
-                if (now <= ths) {
+                if (now <= ths)
                     ret[last--] = ths;
-                } else {
+                else {
                     ret[last--] = now;
                     now = ths;
                     compare_right = true;
@@ -47,21 +46,19 @@ public:
         std::vector<int> ret {};
         ret.reserve(nums.size());
 
-        int left { 0 }, right = nums.size() - 1;
+        int left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         if (nums[left] >= 0) {
-            for (auto num : nums) {
+            for (auto num : nums)
                 ret.push_back(num * num);
-            }
             return ret;
         } else if (nums[right] <= 0) {
-            for (int i { right }; i >= 0; --i) {
+            for (int i { right }; i >= 0; --i)
                 ret.push_back(nums[i] * nums[i]);
-            }
             return ret;
         }
 
-        int mid { right / 2 };
-        while (right - left != 1) {
+        while (right - left > 1) {
+            int mid { left + (right - left) / 2 };
             if (nums[mid] < 0)
                 left = mid;
             else if (nums[mid] > 0)
@@ -71,11 +68,10 @@ public:
                 right = mid + 1;
                 break;
             }
-            mid = left + (right - left) / 2;
         }
 
-        bool left_leave = true;
-        int tmp = nums[left] * nums[left];
+        bool left_leave { true };
+        int tmp { nums[left] * nums[left] };
 
         while (left >= 0 && right < nums.size()) {
             if (left_leave) {

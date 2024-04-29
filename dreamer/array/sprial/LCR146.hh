@@ -2,48 +2,45 @@ class Solution {
 public:
     vector<int> spiralArray(vector<vector<int>>& array)
     {
-        if (array.size() == 0)
+        if (!array.size() || !array[0].size())
             return {};
 
         std::vector<int> ret {};
-        int left { 0 }, right = array[0].size() - 1, below { 0 }, top = array.size() - 1;
-        int x { 0 }, y { 0 }, cnt { 0 }, total { (right + 1) * (top + 1) };
+        int m { static_cast<int>(array.size()) }, n { static_cast<int>(array[0].size()) };
+        ret.reserve(n * m);
 
-        ret.reserve(total);
-
-        while (true) {
-            while (y <= right) {
-                ret.push_back(array[x][y]);
-                ++y, ++cnt;
-                if (cnt == total)
-                    return ret;
+        int left { 0 }, right { n - 1 }, top { m - 1 }, bottom { 0 };
+        int x { 0 }, y { 0 };
+        while (left <= right && bottom <= top) {
+            while (x <= right) {
+                ret.push_back(array[y][x]);
+                ++x;
             }
-            ++x, --y, ++below;
+            --x, ++y, ++bottom;
+            if (bottom > top)
+                break;
 
-            while (x <= top) {
-                ret.push_back(array[x][y]);
-                ++x, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (y <= top) {
+                ret.push_back(array[y][x]);
+                ++y;
             }
             --x, --y, --right;
+            if (left > right)
+                break;
 
-            while (y >= left) {
-                ret.push_back(array[x][y]);
-                --y, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (x >= left) {
+                ret.push_back(array[y][x]);
+                --x;
             }
-            --x, ++y, --top;
+            ++x, --y, --top;
 
-            while (x >= below) {
-                ret.push_back(array[x][y]);
-                --x, ++cnt;
-                if (cnt == total)
-                    return ret;
+            while (y >= bottom) {
+                ret.push_back(array[y][x]);
+                --y;
             }
             ++x, ++y, ++left;
         }
+
         return ret;
     }
 };
