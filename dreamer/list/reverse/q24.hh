@@ -1,20 +1,29 @@
-#pragma once
-
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head)
     {
-        ListNode A[2] { { 0, &A[1] }, { 0, head } };
-        ListNode* pairs = &A[0];
-        while (pairs->next->next && pairs->next->next->next) {
-            // 不能用引用，链路前面的先不动
-            auto first = pairs->next->next, second = pairs->next->next->next;
-            auto tmp = second->next;
-            second->next = first;
-            first->next = tmp;
-            pairs->next->next = second;
-            pairs = pairs->next->next;
+        if (!head || !head->next)
+            return head;
+        ListNode *ret { head->next }, *cur { head };
+
+        {
+            auto tmp { head->next->next };
+            head->next->next = head;
+            head->next = tmp;
         }
-        return A[1].next;
+
+        while (cur->next) {
+            if (cur->next->next) {
+                auto tmp { cur->next->next->next };
+                cur->next->next->next = cur->next;
+                cur->next = cur->next->next;
+                cur->next->next->next = tmp;
+                cur = cur->next->next;
+            } else {
+                break;
+            }
+        }
+
+        return ret;
     }
 };

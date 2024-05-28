@@ -1,23 +1,22 @@
-#pragma once
-
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n)
     {
-        ListNode sentry { 0, head };
-        ListNode *slow = &sentry, *quick = &sentry;
+        ListNode node { 0, head };
+
+        ListNode *fast { &node }, *slow { &node };
         while (n >= 0) {
-            quick = quick->next;
+            fast = fast->next;
             --n;
         }
 
-        while (quick) {
+        while (fast) {
+            fast = fast->next;
             slow = slow->next;
-            quick = quick->next;
         }
 
         slow->next = slow->next->next;
 
-        return sentry.next;
+        return node.next;
     }
 };

@@ -1,16 +1,14 @@
-#pragma once
-
 class Solution {
 public:
     ListNode* reverseList(ListNode* head)
     {
-        ListNode* pre = nullptr;
+        ListNode* ret { nullptr };
         while (head) {
-            ListNode* tmp = head->next;
-            head->next = pre;
-            pre = head;
+            auto tmp { head->next };
+            head->next = ret;
+            ret = head;
             head = tmp;
         }
-        return pre;
+        return ret;
     }
 };

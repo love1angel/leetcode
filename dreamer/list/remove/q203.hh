@@ -1,19 +1,17 @@
-#pragma once
-
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val)
     {
-        ListNode** pp = &head;
-        ListNode* entry = head;
+        ListNode *entry { head }, **pp_node { &head };
+
         while (entry) {
-            if (entry->val == val) {
-                *pp = entry->next;
-            } else {
-                pp = &entry->next;
-            }
+            if (entry->val == val)
+                *pp_node = entry->next;
+            else
+                pp_node = &entry->next;
             entry = entry->next;
         }
+
         return head;
     }
 };
