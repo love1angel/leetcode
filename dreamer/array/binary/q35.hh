@@ -2,7 +2,7 @@ class Solution {
 public:
     int searchInsert(vector<int>& nums, int target)
     {
-        int left { 0 }, right { static_cast<int>(nums.size() - 1) };
+        int left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
             int mid { left + ((right - left) >> 1) };
             if (nums[mid] < target)
@@ -23,7 +23,7 @@ public:
     {
         int beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
-            int mid { left + ((right - left) >> 1) };
+            int mid { beg + ((end - beg) >> 1) };
             if (nums[mid] < target)
                 beg = mid + 1;
             else if (nums[mid] > target)
