@@ -46,8 +46,6 @@ public:
                 end = mid;
             mid = beg + ((end - beg) >> 1);
         }
-        if (mid == end)
-            return -1;
-        return mid;
+        return mid == end ? -1 : mid;
     }
 };

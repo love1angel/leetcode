@@ -2,22 +2,22 @@ class Solution {
 public:
     bool backspaceCompare(string s, string t)
     {
-        int i { static_cast<int>(s.size()) - 1 }, i_skip { 0 };
-        int j { static_cast<int>(t.size()) - 1 }, j_skip { 0 };
+        int s_i { static_cast<int>(s.size()) - 1 }, t_i { static_cast<int>(t.size()) - 1 };
+        int s_stack { 0 }, t_stack { 0 };
 
-        while (i >= 0 || j >= 0) {
-            handle(s, i, i_skip);
-            handle(t, j, j_skip);
+        while (s_i >= 0 || t_i >= 0) {
+            handle(s, s_i, s_stack);
+            handle(t, t_i, t_stack);
 
-            if (i < 0 && j < 0) {
-                return true;
-            } else if (i < 0 || j < 0) {
-                return false;
-            } else {
-                if (s[i] != t[j]) {
+            if (s_i >= 0 && t_i >= 0) {
+                if (s[s_i] != t[t_i]) {
                     return false;
                 }
-                --i, --j;
+                --s_i, --t_i;
+            } else if (s_i < 0 && t_i < 0) {
+                return true;
+            } else {
+                return false;
             }
         }
 
@@ -25,18 +25,16 @@ public:
     }
 
 private:
-    void handle(const std::string& str, int& iterator, int& stack)
+    void handle(const std::string& s, int& i, int& stack)
     {
-        while (iterator >= 0) {
-            if (str[iterator] == '#') {
+        while (i >= 0) {
+            if (s[i] == '#')
                 ++stack;
-                --iterator;
-            } else if (stack) {
+            else if (stack)
                 --stack;
-                --iterator;
-            } else {
-                break;
-            }
+            else
+                return;
+            --i;
         }
     }
 };

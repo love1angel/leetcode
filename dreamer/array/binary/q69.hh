@@ -2,6 +2,20 @@ class Solution {
 public:
     int mySqrt(int x)
     {
+        if (x == 0)
+            return 0;
+        double xi {}, xi_1 { static_cast<double>(x) }, c { static_cast<double>(x) };
+        do {
+            xi = 0.5 * (xi_1 + c / xi_1);
+        } while (std::abs(xi - xi_1) > 1e-7 && (xi_1 = xi));
+        return xi;
+    }
+};
+
+class Solution {
+public:
+    int mySqrt(int x)
+    {
         int left { 0 }, right { x / 2 + 1 };
         while (left <= right) {
             int mid { left + ((right - left) >> 1) };
@@ -14,21 +28,5 @@ public:
                 return mid;
         }
         return right;
-    }
-};
-
-class Solution {
-public:
-    int mySqrt(int x)
-    {
-        if (x == 0)
-            return 0;
-        double xi {}, x0 { static_cast<double>(x) }, c { static_cast<double>(x) };
-
-        do {
-            xi = 0.5 * (x0 + c / x0);
-        } while (std::abs(xi - x0) > 1e-7 && (x0 = xi));
-
-        return xi;
     }
 };
