@@ -2,26 +2,28 @@ class Solution {
 public:
     int totalFruit(vector<int>& fruits)
     {
-        int left { 0 }, max { 0 };
-        std::unordered_map<int, int> m_val_last_idx;
-        int i { 0 };
-        for (; i < fruits.size(); ++i) {
-            if (m_val_last_idx.size() == 2) {
-                if (!m_val_last_idx.contains(fruits[i])) {
+        std::unordered_map<int, int> map;
+        int max { 0 }, left { 0 };
+        for (int i { 0 }; i < fruits.size(); ++i) {
+            if (map.contains(fruits[i])) {
+                map[fruits[i]] = i;
+            } else {
+                if (map.size() < 2) {
+                    map[fruits[i]] = i;
+                } else {
                     max = std::max(max, i - left);
-
-                    std::erase_if(m_val_last_idx, [&](auto& val) {
-                        if (std::get<0>(val) != fruits[i - 1]) {
-                            left = std::get<1>(val) + 1;
-                            return true;
+                    std::erase_if(map, [&](const auto& itr) {
+                        if (itr.first == fruits[i - 1]) {
+                            return false;
                         }
-                        return false;
+                        left = itr.second + 1;
+                        return true;
                     });
+                    map[fruits[i]] = i;
                 }
             }
-            m_val_last_idx[fruits[i]] = i;
         }
-        max = std::max(max, i - left);
-        return max;
+        max = std::max<int>(max, fruits.size() - left);
+        return max == 0 ? fruits.size() : max;
     }
 };
