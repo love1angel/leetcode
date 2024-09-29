@@ -1,16 +1,20 @@
+// https://leetcode.cn/problems/search-insert-position/description
+
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target)
     {
-        int left { 0 }, right { static_cast<int>(nums.size()) - 1 };
+        auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
-            int mid { left + ((right - left) >> 1) };
-            if (nums[mid] < target)
+            const auto mid { left + ((right - left) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 left = mid + 1;
-            else if (nums[mid] > target)
+            } else if (std::is_lt(ordering)) {
                 right = mid - 1;
-            else
+            } else {
                 return mid;
+            }
         }
         // return right + 1;
         return left;
@@ -21,15 +25,17 @@ class Solution {
 public:
     int searchInsert(vector<int>& nums, int target)
     {
-        int beg { 0 }, end { static_cast<int>(nums.size()) };
+        auto beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
-            int mid { beg + ((end - beg) >> 1) };
-            if (nums[mid] < target)
+            const auto mid { beg + ((end - beg) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 beg = mid + 1;
-            else if (nums[mid] > target)
+            } else if (std::is_lt(ordering)) {
                 end = mid;
-            else
+            } else {
                 return mid;
+            }
         }
         // return end;
         return beg;

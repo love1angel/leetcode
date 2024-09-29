@@ -1,44 +1,56 @@
+// https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/description
+
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target)
     {
-        int left { 0 }, right { static_cast<int>(nums.size()) - 1 }, mid { right >> 1 };
+        auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
+        auto mid { right >> 1 };
         while (left <= right) {
-            if (nums[mid] < target)
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 left = mid + 1;
-            else if (nums[mid] > target)
+            } else if (std::is_lt(ordering)) {
                 right = mid - 1;
-            else
+            } else {
                 break;
+            }
             mid = left + ((right - left) >> 1);
         }
-        if (left > right)
+        if (left > right) {
             return { -1, -1 };
-        return { searchLeft(nums, left, mid - 1, target),
-            searchRight(nums, mid + 1, right, target) };
+        }
+        return {
+            searchLeft(nums, left, mid - 1, target),
+            searchRight(nums, mid + 1, right, target)
+        };
     }
 
 private:
-    int searchLeft(const vector<int>& nums, int left, int right, int target)
+    int searchLeft(const std::vector<int>& nums, int left, int right, int target)
     {
         while (left <= right) {
-            int mid { left + ((right - left) >> 1) };
-            if (nums[mid] < target)
+            const auto mid { left + ((right - left) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 left = mid + 1;
-            else
+            } else {
                 right = mid - 1;
+            }
         }
         return left;
     }
 
-    int searchRight(const vector<int>& nums, int left, int right, int target)
+    int searchRight(const std::vector<int>& nums, int left, int right, int target)
     {
         while (left <= right) {
-            int mid { left + ((right - left) >> 1) };
-            if (nums[mid] > target)
+            const auto mid { left + ((right - left) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_lt(ordering)) {
                 right = mid - 1;
-            else
+            } else {
                 left = mid + 1;
+            }
         }
         return right;
     }

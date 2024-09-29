@@ -1,16 +1,20 @@
+// https://leetcode.cn/problems/binary-search/description
+
 class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int left { 0 }, right { static_cast<int>(nums.size()) - 1 };
+        auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
-            int mid { left + ((right - left) >> 1) };
-            if (nums[mid] < target)
+            const auto mid { left + ((right - left) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 left = mid + 1;
-            else if (nums[mid] > target)
+            } else if (std::is_lt(ordering)) {
                 right = mid - 1;
-            else
+            } else {
                 return mid;
+            }
         }
         return -1;
     }
@@ -20,15 +24,17 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int beg { 0 }, end { static_cast<int>(nums.size()) };
+        auto beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
-            int mid { beg + ((end - beg) >> 1) };
-            if (nums[mid] < target)
+            const auto mid { beg + ((end - beg) >> 1) };
+            const auto ordering { target <=> nums[mid] };
+            if (std::is_gt(ordering)) {
                 beg = mid + 1;
-            else if (nums[mid] > target)
+            } else if (std::is_lt(ordering)) {
                 end = mid;
-            else
+            } else {
                 return mid;
+            }
         }
         return -1;
     }
@@ -38,12 +44,14 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        int beg { 0 }, end { static_cast<int>(nums.size()) }, mid { end >> 1 };
+        auto beg { 0 }, end { static_cast<int>(nums.size()) };
+        auto mid { beg + ((end - beg) >> 1) };
         while (mid != end && nums[mid] != target) {
-            if (nums[mid] < target)
+            if (nums[mid] < target) {
                 beg = mid + 1;
-            else
+            } else {
                 end = mid;
+            }
             mid = beg + ((end - beg) >> 1);
         }
         return mid == end ? -1 : mid;
