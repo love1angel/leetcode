@@ -1,13 +1,16 @@
+// https://leetcode.cn/problems/remove-element/description
+
 class Solution {
 public:
-    int removeElement(vector<int>& nums, int val)
+    int removeElement(std::vector<int>& nums, int val)
     {
-        int left { 0 }, right { static_cast<int>(nums.size()) - 1 };
+        auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
-            if (nums[left] == val)
+            if (nums[left] == val) {
                 nums[left] = nums[right--];
-            else
+            } else {
                 ++left;
+            }
         }
         return left;
     }

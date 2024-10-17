@@ -55,3 +55,35 @@ private:
         return right;
     }
 };
+
+class Solution {
+public:
+    std::vector<int> searchRange(std::vector<int>& nums, int target)
+    {
+        const auto left = search(nums, target, true);
+        const auto right = search(nums, target, false) - 1;
+
+        if (left <= right && nums[left] == target && nums[right] == target) {
+            return { left, right };
+        }
+
+        return { -1, -1 };
+    }
+
+private:
+    int search(const std::vector<int>& nums, int target, bool flag)
+    {
+        auto ans { nums.size() };
+        auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
+        while (left <= right) {
+            const auto mid = left + ((right - left) >> 1);
+            if (nums[mid] > target || (flag && nums[mid] >= target)) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
