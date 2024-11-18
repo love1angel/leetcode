@@ -1,4 +1,4 @@
-// https://leetcode.cn/problems/sqrtx
+// https://leetcode.cn/problems/sqrtx/description/
 
 class Solution {
 public:
@@ -8,10 +8,11 @@ public:
             return 0;
         }
         const auto c { static_cast<double>(x) };
-        auto xi { .0 }, x0 { static_cast<double>(x) };
+        auto x_e { static_cast<double>(x) };
+        double x_n;
         do {
-            xi = 0.5 * (c / x0 + x0);
-        } while (std::abs(xi - x0) > 1e-7 && (x0 = xi));
-        return xi;
+            x_n = 0.5 * (x_e + c / x_e);
+        } while (std::abs(x_n - x_e) > 1e-7 && (x_e = x_n));
+        return x_e;
     }
 };

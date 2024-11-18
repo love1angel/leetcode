@@ -7,7 +7,7 @@ public:
     std::vector<int> twoSum(std::vector<int>& nums, int target)
     {
         std::unordered_map<int, int> map {};
-        for (auto [idx, num] : nums | std::views::enumerate) {
+        for (auto const [idx, num] : nums | std::views::enumerate) {
             if (map.contains(target - num)) [[unlikely]] {
                 return { static_cast<int>(idx), map[target - num] };
             } else {

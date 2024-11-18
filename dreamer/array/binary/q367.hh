@@ -1,14 +1,15 @@
-// https://leetcode.cn/problems/valid-perfect-square/description
+// https://leetcode.cn/problems/valid-perfect-square/description/
 
 class Solution {
 public:
     bool isPerfectSquare(int num)
     {
         const auto c { static_cast<double>(num) };
-        auto xi { .0 }, x0 { static_cast<double>(num) };
+        auto x_e { static_cast<double>(num) };
+        double x_n;
         do {
-            xi = 0.5 * (c / x0 + x0);
-        } while (std::abs(xi - x0) > 1e-7 && (x0 = xi));
-        return num == static_cast<int>(xi) * static_cast<int>(xi);
+            x_n = 0.5 * (x_e + c / x_e);
+        } while (std::abs(x_n - x_e) > 1e-7 && (x_e = x_n));
+        return num == static_cast<int>(x_n) * static_cast<int>(x_e);
     }
 };

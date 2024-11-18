@@ -1,4 +1,4 @@
-// https://leetcode.cn/problems/binary-search/description
+// https://leetcode.cn/problems/binary-search/description/
 
 class Solution {
 public:
@@ -6,7 +6,7 @@ public:
     {
         auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
-            const auto mid { left + ((right - left) >> 1) };
+            const auto mid { std::midpoint(left, right) };
             const auto ordering { target <=> nums[mid] };
             if (std::is_gt(ordering)) {
                 left = mid + 1;
@@ -26,7 +26,7 @@ public:
     {
         auto beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
-            const auto mid { beg + ((end - beg) >> 1) };
+            const auto mid { std::midpoint(beg, end) };
             const auto ordering { target <=> nums[mid] };
             if (std::is_gt(ordering)) {
                 beg = mid + 1;
@@ -44,15 +44,14 @@ class Solution {
 public:
     int search(vector<int>& nums, int target)
     {
-        auto beg { 0 }, end { static_cast<int>(nums.size()) };
-        auto mid { beg + ((end - beg) >> 1) };
+        auto beg { 0 }, end { static_cast<int>(nums.size()) }, mid { end >> 1 };
         while (mid != end && nums[mid] != target) {
-            if (nums[mid] < target) {
+            if (target > nums[mid]) {
                 beg = mid + 1;
             } else {
                 end = mid;
             }
-            mid = beg + ((end - beg) >> 1);
+            mid = std::midpoint(beg, end);
         }
         return mid == end ? -1 : mid;
     }

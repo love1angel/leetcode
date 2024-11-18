@@ -1,4 +1,4 @@
-// https://leetcode.cn/problems/search-insert-position/description
+// https://leetcode.cn/problems/search-insert-position/description/
 
 class Solution {
 public:
@@ -6,7 +6,7 @@ public:
     {
         auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
-            const auto mid { left + ((right - left) >> 1) };
+            const auto mid { std::midpoint(left, right) };
             const auto ordering { target <=> nums[mid] };
             if (std::is_gt(ordering)) {
                 left = mid + 1;
@@ -27,7 +27,7 @@ public:
     {
         auto beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
-            const auto mid { beg + ((end - beg) >> 1) };
+            const auto mid { std::midpoint(left, right) };
             const auto ordering { target <=> nums[mid] };
             if (std::is_gt(ordering)) {
                 beg = mid + 1;
