@@ -1,11 +1,14 @@
+// https://leetcode.cn/problems/move-zeroes/description/
+
 class Solution {
 public:
     void moveZeroes(vector<int>& nums)
     {
-        int len { 0 };
-        for (int i { 0 }; i < nums.size(); ++i) {
-            if (nums[i] != 0)
-                std::swap(nums[len++], nums[i]);
+        auto cur { 0 };
+        for (auto& num : nums) {
+            if (num != 0) {
+                std::swap(nums[cur++], num);
+            }
         }
     }
 };

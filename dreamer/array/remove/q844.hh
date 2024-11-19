@@ -1,40 +1,46 @@
+// https://leetcode.cn/problems/backspace-string-compare/description/
+
 class Solution {
 public:
     bool backspaceCompare(string s, string t)
     {
-        int s_i { static_cast<int>(s.size()) - 1 }, t_i { static_cast<int>(t.size()) - 1 };
-        int s_stack { 0 }, t_stack { 0 };
+        auto l_cnt { 0 }, r_cnt { 0 };
+        auto l_ptr { static_cast<int>(s.size()) - 1 }, r_ptr { static_cast<int>(t.size()) - 1 };
 
-        while (s_i >= 0 || t_i >= 0) {
-            handle(s, s_i, s_stack);
-            handle(t, t_i, t_stack);
+        while (l_ptr >= 0 || r_ptr >= 0) {
+            this->handle(s, l_ptr, l_cnt);
+            this->handle(t, r_ptr, r_cnt);
 
-            if (s_i >= 0 && t_i >= 0) {
-                if (s[s_i] != t[t_i]) {
+            if (l_ptr >= 0 && r_ptr >= 0) {
+                if (s[l_ptr] != t[r_ptr]) {
                     return false;
                 }
-                --s_i, --t_i;
-            } else if (s_i < 0 && t_i < 0) {
+                --l_ptr, --r_ptr;
+            } else if (l_ptr < 0 && r_ptr < 0) {
                 return true;
             } else {
                 return false;
             }
         }
 
+        if (l_ptr >= 0 || r_ptr >= 0) {
+            return false;
+        }
         return true;
     }
 
 private:
-    void handle(const std::string& s, int& i, int& stack)
+    void handle(const std::string& str, int& ptr, int& cnt)
     {
-        while (i >= 0) {
-            if (s[i] == '#')
-                ++stack;
-            else if (stack)
-                --stack;
-            else
+        while (ptr >= 0) {
+            if (str[ptr] == '#') {
+                ++cnt;
+            } else if (cnt) {
+                --cnt;
+            } else {
                 return;
-            --i;
+            }
+            --ptr;
         }
     }
 };

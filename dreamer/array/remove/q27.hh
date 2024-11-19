@@ -1,4 +1,4 @@
-// https://leetcode.cn/problems/remove-element/description
+// https://leetcode.cn/problems/remove-element/description/
 
 class Solution {
 public:

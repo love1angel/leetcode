@@ -1,40 +1,39 @@
+// https://leetcode.cn/problems/squares-of-a-sorted-array/description/
+
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums)
     {
-        std::vector<int> ret {};
+        std::vector<int> ret;
         ret.resize(nums.size());
 
-        int tmp { nums[0] * nums[0] };
-        int left { 0 }, right { static_cast<int>(nums.size()) - 1 }, cur { right };
-        bool stored_left { true };
-
+        auto left { 1 }, right { static_cast<int>(nums.size()) - 1 };
+        auto tmp = nums[0] * nums[0];
+        auto cur { right };
+        bool store_l { true };
         while (left <= right) {
-            if (stored_left) {
-                int ths { nums[right] * nums[right] };
-                if (ths >= tmp) {
-                    ret[cur--] = ths;
-                    --right;
-                } else {
-                    ret[cur--] = tmp;
-                    ++left;
-                    tmp = ths;
-                    stored_left = false;
-                }
+            if (store_l) {
+                calc_cmp(nums, right, tmp, store_l, ret, cur);
+                --right;
             } else {
-                int ths { nums[left] * nums[left] };
-                if (ths >= tmp) {
-                    ret[cur--] = ths;
-                    ++left;
-                } else {
-                    ret[cur--] = tmp;
-                    --right;
-                    tmp = ths;
-                    stored_left = true;
-                }
+                calc_cmp(nums, left, tmp, store_l, ret, cur);
+                ++left;
             }
         }
-
+        ret[cur] = tmp;
         return ret;
+    }
+
+private:
+    void calc_cmp(const std::vector<int>& nums, int& ptr, int& tmp, bool& flag, std::vector<int>& ret, int& cur)
+    {
+        auto value { nums[ptr] * nums[ptr] };
+        if (value >= tmp) {
+            ret[cur--] = value;
+        } else {
+            ret[cur--] = tmp;
+            tmp = value;
+            flag = !flag;
+        }
     }
 };
