@@ -1,29 +1,25 @@
+// https://leetcode.cn/problems/fruit-into-baskets/description/
+
 class Solution {
 public:
-    int totalFruit(vector<int>& fruits)
+    int totalFruit(const std::vector<int>& fruits)
     {
         std::unordered_map<int, int> map;
-        int max { 0 }, left { 0 };
-        for (int i { 0 }; i < fruits.size(); ++i) {
-            if (map.contains(fruits[i])) {
-                map[fruits[i]] = i;
-            } else {
-                if (map.size() < 2) {
-                    map[fruits[i]] = i;
-                } else {
-                    max = std::max(max, i - left);
-                    std::erase_if(map, [&](const auto& itr) {
-                        if (itr.first == fruits[i - 1]) {
-                            return false;
-                        }
-                        left = itr.second + 1;
-                        return true;
-                    });
-                    map[fruits[i]] = i;
-                }
+        auto i { 0 }, max_len { 0 }, j { 0 };
+        for (; j < fruits.size(); ++j) {
+            if (!map.contains(fruits[j]) && map.size() == 2) {
+                max_len = std::max(max_len, j - i);
+                std::erase_if(map, [&](auto& pair) {
+                    if (pair.first == fruits[j - 1]) {
+                        return false;
+                    }
+                    i = pair.second + 1;
+                    return true;
+                });
             }
+            map[fruits[j]] = j;
         }
-        max = std::max<int>(max, fruits.size() - left);
-        return max == 0 ? fruits.size() : max;
+        max_len = std::max(max_len, j - i);
+        return max_len;
     }
 };

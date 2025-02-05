@@ -2,45 +2,41 @@
 
 class Solution {
 public:
-    bool backspaceCompare(string s, string t)
+    bool backspaceCompare(const std::string& s, const std::string& t)
     {
-        auto l_cnt { 0 }, r_cnt { 0 };
-        auto l_ptr { static_cast<int>(s.size()) - 1 }, r_ptr { static_cast<int>(t.size()) - 1 };
+        auto s_ptr { static_cast<int>(s.size()) - 1 }, t_ptr { static_cast<int>(t.size()) - 1 };
+        auto s_stack { 0 }, t_stack { 0 };
 
-        while (l_ptr >= 0 || r_ptr >= 0) {
-            this->handle(s, l_ptr, l_cnt);
-            this->handle(t, r_ptr, r_cnt);
+        while (s_ptr >= 0 || t_ptr >= 0) {
+            Solution::handle(s, s_ptr, s_stack);
+            Solution::handle(t, t_ptr, t_stack);
 
-            if (l_ptr >= 0 && r_ptr >= 0) {
-                if (s[l_ptr] != t[r_ptr]) {
+            if (s_ptr >= 0 && t_ptr >= 0) {
+                if (s[s_ptr] != t[t_ptr]) {
                     return false;
                 }
-                --l_ptr, --r_ptr;
-            } else if (l_ptr < 0 && r_ptr < 0) {
+                --s_ptr, --t_ptr;
+            } else if (s_ptr < 0 && t_ptr < 0) {
                 return true;
             } else {
                 return false;
             }
         }
-
-        if (l_ptr >= 0 || r_ptr >= 0) {
-            return false;
-        }
         return true;
     }
 
 private:
-    void handle(const std::string& str, int& ptr, int& cnt)
+    static void handle(const std::string& s, int& offset, int& stack)
     {
-        while (ptr >= 0) {
-            if (str[ptr] == '#') {
-                ++cnt;
-            } else if (cnt) {
-                --cnt;
-            } else {
+        while (offset >= 0) {
+            if (s[offset] == '#') {
+                ++stack;
+            } else if (stack == 0) {
                 return;
+            } else {
+                --stack;
             }
-            --ptr;
+            --offset;
         }
     }
 };

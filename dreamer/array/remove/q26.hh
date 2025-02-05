@@ -5,9 +5,9 @@ public:
     int removeDuplicates(std::vector<int>& nums)
     {
         auto cur { 0 };
-        for (auto i { 1 }; i < nums.size(); ++i) {
-            if (nums[i] != nums[cur]) {
-                nums[++cur] = nums[i];
+        for (auto num : nums) {
+            if (num != nums[cur]) {
+                nums[++cur] = num;
             }
         }
         return cur + 1;

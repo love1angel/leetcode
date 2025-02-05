@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    vector<int> sortedSquares(vector<int>& nums)
+    std::vector<int> sortedSquares(const vector<int>& nums)
     {
         std::vector<int> ret;
         ret.resize(nums.size());
@@ -13,10 +13,10 @@ public:
         bool store_l { true };
         while (left <= right) {
             if (store_l) {
-                calc_cmp(nums, right, tmp, store_l, ret, cur);
+                Solution::calc_cmp(nums, right, tmp, store_l, ret, cur);
                 --right;
             } else {
-                calc_cmp(nums, left, tmp, store_l, ret, cur);
+                Solution::calc_cmp(nums, left, tmp, store_l, ret, cur);
                 ++left;
             }
         }
@@ -25,7 +25,7 @@ public:
     }
 
 private:
-    void calc_cmp(const std::vector<int>& nums, int& ptr, int& tmp, bool& flag, std::vector<int>& ret, int& cur)
+    static void calc_cmp(const std::vector<int>& nums, int& ptr, int& tmp, bool& flag, std::vector<int>& ret, int& cur)
     {
         auto value { nums[ptr] * nums[ptr] };
         if (value >= tmp) {

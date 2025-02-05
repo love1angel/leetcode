@@ -2,15 +2,14 @@
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target)
+    int search(const std::vector<int>& nums, const int target)
     {
         auto left { 0 }, right { static_cast<int>(nums.size()) - 1 };
         while (left <= right) {
             const auto mid { std::midpoint(left, right) };
-            const auto ordering { target <=> nums[mid] };
-            if (std::is_gt(ordering)) {
+            if (const auto cmp { nums[mid] <=> target }; std::is_lt(cmp)) {
                 left = mid + 1;
-            } else if (std::is_lt(ordering)) {
+            } else if (std::is_gt(cmp)) {
                 right = mid - 1;
             } else {
                 return mid;
@@ -22,15 +21,14 @@ public:
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target)
+    int search(const std::vector<int>& nums, const int target)
     {
         auto beg { 0 }, end { static_cast<int>(nums.size()) };
         while (beg < end) {
             const auto mid { std::midpoint(beg, end) };
-            const auto ordering { target <=> nums[mid] };
-            if (std::is_gt(ordering)) {
+            if (const auto cmp { nums[mid] <=> target }; std::is_lt(cmp)) {
                 beg = mid + 1;
-            } else if (std::is_lt(ordering)) {
+            } else if (std::is_gt(cmp)) {
                 end = mid;
             } else {
                 return mid;
@@ -42,11 +40,11 @@ public:
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target)
+    int search(const std::vector<int>& nums, const int target)
     {
-        auto beg { 0 }, end { static_cast<int>(nums.size()) }, mid { end >> 1 };
+        auto beg { 0 }, end { static_cast<int>(nums.size()) }, mid { std::midpoint(beg, end) };
         while (mid != end && nums[mid] != target) {
-            if (target > nums[mid]) {
+            if (nums[mid] < target) {
                 beg = mid + 1;
             } else {
                 end = mid;

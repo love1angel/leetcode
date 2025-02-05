@@ -8,8 +8,8 @@ public:
         auto x_e { static_cast<double>(num) };
         double x_n;
         do {
-            x_n = 0.5 * (x_e + c / x_e);
+            x_n = .5 * (x_e + c / x_e);
         } while (std::abs(x_n - x_e) > 1e-7 && (x_e = x_n));
-        return num == static_cast<int>(x_n) * static_cast<int>(x_e);
+        return static_cast<int>(x_e) * static_cast<int>(x_e) == num;
     }
 };
