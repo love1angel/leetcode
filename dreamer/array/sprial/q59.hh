@@ -1,9 +1,11 @@
+// https://leetcode.cn/problems/spiral-matrix-ii/description/
+
 class Solution {
 public:
-    vector<vector<int>> generateMatrix(int n)
+    std::vector<std::vector<int>> generateMatrix(int n)
     {
         std::vector<std::vector<int>> matrix(n, std::vector<int>(n));
-        int left { 0 }, right { n - 1 }, top { n - 1 }, bottom { 0 };
+        auto left { 0 }, right { n - 1 }, top { n - 1 }, bottom { 0 };
         int x { 0 }, y { 0 }, cnt { 1 }, loop { n / 2 };
         while (loop) {
             while (x <= right) {

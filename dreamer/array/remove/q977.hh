@@ -2,37 +2,38 @@
 
 class Solution {
 public:
-    std::vector<int> sortedSquares(const vector<int>& nums)
+    std::vector<int> sortedSquares(const std::vector<int>& nums)
     {
-        std::vector<int> ret;
-        ret.resize(nums.size());
+        std::vector ret(nums.size(), 0);
 
-        auto left { 1 }, right { static_cast<int>(nums.size()) - 1 };
-        auto tmp = nums[0] * nums[0];
-        auto cur { right };
-        bool store_l { true };
+        auto cur { static_cast<int>(nums.size()) - 1 };
+        bool store_left { true };
+        auto stored_value { nums[0] * nums[0] };
+        auto left { 1 }, right { cur };
+
         while (left <= right) {
-            if (store_l) {
-                Solution::calc_cmp(nums, right, tmp, store_l, ret, cur);
+            if (store_left) {
+                Solution::calc_cmp_store(nums, right, stored_value, store_left, ret, cur);
                 --right;
             } else {
-                Solution::calc_cmp(nums, left, tmp, store_l, ret, cur);
+                Solution::calc_cmp_store(nums, left, stored_value, store_left, ret, cur);
                 ++left;
             }
         }
-        ret[cur] = tmp;
+
+        ret[cur] = stored_value;
         return ret;
     }
 
 private:
-    static void calc_cmp(const std::vector<int>& nums, int& ptr, int& tmp, bool& flag, std::vector<int>& ret, int& cur)
+    static void calc_cmp_store(const std::vector<int>& nums, int& cur, int& stored_value, bool& flag, std::vector<int>& ret, int& ret_cur)
     {
-        auto value { nums[ptr] * nums[ptr] };
-        if (value >= tmp) {
-            ret[cur--] = value;
+        auto new_value { nums[cur] * nums[cur] };
+        if (new_value >= stored_value) {
+            ret[ret_cur--] = new_value;
         } else {
-            ret[cur--] = tmp;
-            tmp = value;
+            ret[ret_cur--] = stored_value;
+            stored_value = new_value;
             flag = !flag;
         }
     }

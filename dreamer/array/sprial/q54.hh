@@ -1,43 +1,39 @@
+// https://leetcode.cn/problems/spiral-matrix/
+
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix)
+    std::vector<int> spiralOrder(const std::vector<std::vector<int>>& matrix)
     {
-        std::vector<int> ret {};
-        int m { static_cast<int>(matrix.size()) }, n { static_cast<int>(matrix[0].size()) };
-        ret.reserve(n * m);
+        std::vector<int> result;
+        auto x { 0 }, y { 0 }, loop { static_cast<int>(matrix.size() * matrix[0].size()) };
+        result.reserve(loop);
 
-        int left { 0 }, right { n - 1 }, top { m - 1 }, bottom { 0 };
-        int x { 0 }, y { 0 };
-        while (left <= right && bottom <= top) {
+        auto left { 0 }, right { static_cast<int>(matrix[0].size()) - 1 }, top { static_cast<int>(matrix.size()) - 1 }, bottom { 0 };
+        while (loop > 0) {
             while (x <= right) {
-                ret.push_back(matrix[y][x]);
-                ++x;
+                result.push_back(matrix[y][x]);
+                ++x, --loop;
             }
             --x, ++y, ++bottom;
-            if (bottom > top)
-                break;
-
             while (y <= top) {
-                ret.push_back(matrix[y][x]);
-                ++y;
+                result.push_back(matrix[y][x]);
+                ++y, --loop;
             }
             --x, --y, --right;
-            if (left > right)
+            if (loop == 0) {
                 break;
-
+            }
             while (x >= left) {
-                ret.push_back(matrix[y][x]);
-                --x;
+                result.push_back(matrix[y][x]);
+                --x, --loop;
             }
             ++x, --y, --top;
-
             while (y >= bottom) {
-                ret.push_back(matrix[y][x]);
-                --y;
+                result.push_back(matrix[y][x]);
+                --y, --loop;
             }
             ++x, ++y, ++left;
         }
-
-        return ret;
+        return result;
     }
 };
